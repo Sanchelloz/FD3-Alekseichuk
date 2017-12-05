@@ -40,18 +40,3 @@
 .VotesBlock .Catalog .Product .Product_residue {
     flex-grow: 1;
 }
-
-.VotesBlock .Answers .Answer {
-    padding: 2px 0;
-}
-
-.VotesBlock .Answers .Answer .Count {
-    float: right;
-    width: 30px;
-    font-weight: bold;
-    text-align: right;
-}
-
-.VotesBlock .Answers .Answer .Text {
-    margin-right: 30px;
-}
