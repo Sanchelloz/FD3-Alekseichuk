@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Голосование</title>
+</head>
+
+<body>
+    <div id="container"></div>
+
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+
+    <script src="VotesBlock.js"></script>
+    <link rel="stylesheet" type="text/css" href="VotesBlock.css" />
+
+    <script>
+        var captionText = 'Каталог товара нашего магазина';
+        var catalogArr = [{
+            name: 'Alize Baby Wool',
+            URL: 'http://klub-ok.by/images/thumbnails/1/280/295/1375087377baby_wool_141.jpg}',
+            code: 55,
+            price: 3.0,
+            residue: 3,
+        }, {
+            name: 'Alpaca Wool',
+            URL: 'http://klub-ok.by/images/thumbnails/3/280/468/2951.jpg',
+            code: 2951,
+            price: 9.1,
+            residue: 10,
+        }, {
+            name: 'Artistic 8/2',
+            URL: 'http://klub-ok.by/images/thumbnails/3/280/507/blue_lila.jpg',
+            code: 554,
+            price: 11.2,
+            residue: 15,
+        }, {
+            name: 'Baby Joy',
+            URL: 'http://klub-ok.by/images/thumbnails/18/280/500/5703-1.jpg',
+            code: 5703,
+            price: 2.6,
+            residue: 30,
+        }];
+
+        ReactDOM.render(
+            React.createElement(VotesBlock, {
+                caption: captionText,
+                catalog: catalogArr,
+            }),
+            document.getElementById('container')
+        );
+    </script>
+
+</body>
+
+</html>
