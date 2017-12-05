@@ -20,7 +20,8 @@
     render: function() {
 
         var catalogCode = this.props.catalog.map(v =>
-            React.DOM.div({ key: v.name, className: 'Product_name' },
+            React.DOM.div({ key: v.name, className: 'Product' },
+                React.DOM.span({ className: 'Product_name' }, v.name),
                 React.DOM.span({ className: 'Product_count' }, v.code),
                 React.DOM.span({ className: 'Product_price' }, v.price + 'руб'),
                 React.DOM.span({ className: 'Product_residue' }, v.residue),
@@ -32,5 +33,4 @@
             React.DOM.div({ className: 'Catalog' }, catalogCode),
         );
     },
-
 });

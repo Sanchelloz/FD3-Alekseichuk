@@ -1,16 +1,44 @@
-﻿.VotesBlock {
-    border: double gray 3px;
-    width: 100%;
-    padding: 3px 7px;
-    background-color: #F0F0F0;
+﻿body {
+    margin: 0;
+    padding: 0;
 }
 
-.VotesBlock .Question {
+.VotesBlock {
+    border: double gray 3px;
+    width: 90%;
+    padding: 3px 7px;
+    background-color: #F0F0F0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.VotesBlock .Caption {
     font-weight: bold;
 }
 
-.VotesBlock .Answers {
-    padding-top: 5px;
+.VotesBlock .Catalog {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.VotesBlock .Catalog .Product .Product_name {
+    flex-grow: 1;
+}
+
+.VotesBlock .Catalog .Product .Product_count {
+    flex-grow: 1;
+}
+
+.VotesBlock .Catalog .Product .Product_price {
+    flex-grow: 1;
+}
+
+.VotesBlock .Catalog .Product .Product_residue {
+    flex-grow: 1;
 }
 
 .VotesBlock .Answers .Answer {
