@@ -21,11 +21,11 @@
 
         var catalogCode = this.props.catalog.map(v =>
             React.DOM.div({ key: v.name, className: 'Product' },
-                React.DOM.span({ className: 'Product_name' }, v.name),
-                React.DOM.span({ className: 'Product_count' }, v.code),
-                React.DOM.span({ className: 'Product_price' }, v.price + 'руб'),
-                React.DOM.span({ className: 'Product_residue' }, v.residue),
-                //React.DOM.img({ className: 'Product_foto' }, v.URL),
+                React.DOM.div({ className: 'Product_name' }, v.name),
+                React.DOM.div({ className: 'Product_count' }, v.code),
+                React.DOM.div({ className: 'Product_price' }, v.price + 'руб'),
+                React.DOM.div({ className: 'Product_residue' }, v.residue),
+                React.DOM.img({ src: "http://klub-ok.by/images/thumbnails/3/280/507/blue_lila.jpg" }, v.URL),
             )
         );
         return React.DOM.div({ className: 'VotesBlock' },

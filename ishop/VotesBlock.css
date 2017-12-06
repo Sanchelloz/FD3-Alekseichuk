@@ -23,20 +23,24 @@
     flex-direction: column;
     align-items: center;
     padding-top: 10px;
+    width: 100%;
 }
 
-.VotesBlock .Catalog .Product .Product_name {
-    flex-grow: 1;
+.VotesBlock .Catalog .Product:nth-child(odd) {
+    background: rgb(147, 147, 153);
 }
 
-.VotesBlock .Catalog .Product .Product_count {
-    flex-grow: 1;
+.VotesBlock .Catalog .Product {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 }
 
-.VotesBlock .Catalog .Product .Product_price {
-    flex-grow: 1;
-}
-
+.VotesBlock .Catalog .Product .Product_name,
+.VotesBlock .Catalog .Product .Product_count,
+.VotesBlock .Catalog .Product .Product_price,
 .VotesBlock .Catalog .Product .Product_residue {
-    flex-grow: 1;
+    width: 25%;
+    text-align: center;
 }
