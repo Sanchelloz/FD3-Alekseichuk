@@ -25,7 +25,7 @@
                 React.DOM.div({ className: 'Product_count' }, v.code),
                 React.DOM.div({ className: 'Product_price' }, v.price + 'руб'),
                 React.DOM.div({ className: 'Product_residue' }, v.residue),
-                React.DOM.img({ src: "http://klub-ok.by/images/thumbnails/3/280/507/blue_lila.jpg" }, v.URL),
+                //React.DOM.img({ src: "http://klub-ok.by/images/thumbnails/3/280/507/blue_lila.jpg" }, v.URL),
             )
         );
         return React.DOM.div({ className: 'VotesBlock' },
