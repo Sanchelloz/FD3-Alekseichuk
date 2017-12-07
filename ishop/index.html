@@ -12,11 +12,20 @@
     <script src="https://unpkg.com/react@15/dist/react.js"></script>
     <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
 
-    <script src="JS/VotesBlock.js"></script>
+    <script src="JS/CatalogBlock.js"></script>
     <script src="JS/Catalog.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="CSS/VotesBlock.css" />
+    <link rel="stylesheet" type="text/css" href="CSS/CatalogBlock.css" />
 
+    <script>
+      ReactDOM.render(
+        React.createElement(CatalogBlock, {
+          caption: captionText,
+          catalog: catalogArr,
+        }),
+        document.getElementById('container'),
+      );
+    </script>
 
 </body>
 

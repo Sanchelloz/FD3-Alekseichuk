@@ -3,10 +3,10 @@
     padding: 0;
 }
 
-.VotesBlock {
-    border: double gray 3px;
+.CatalogBlock {
+    
     width: 90%;
-    padding: 3px 7px;
+    padding: 3px 0;
     background-color: #F0F0F0;
     display: flex;
     flex-direction: column;
@@ -14,11 +14,13 @@
     margin: 0 auto;
 }
 
-.VotesBlock .Caption {
+.CatalogBlock .Caption {
     font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 30px;
 }
 
-.VotesBlock .Catalog {
+.CatalogBlock .Catalog {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,21 +28,26 @@
     width: 100%;
 }
 
-.VotesBlock .Catalog .Product:nth-child(odd) {
+.CatalogBlock .Catalog .Product:nth-child(odd) {
     background: rgb(147, 147, 153);
 }
 
-.VotesBlock .Catalog .Product {
+.CatalogBlock .Catalog .Product {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
 }
 
-.VotesBlock .Catalog .Product .Product_name,
-.VotesBlock .Catalog .Product .Product_count,
-.VotesBlock .Catalog .Product .Product_price,
-.VotesBlock .Catalog .Product .Product_residue {
+.CatalogBlock .Catalog .Product img {
+    width: 100px;
+    height: 100px;
+}
+
+.CatalogBlock .Catalog .Product .Product_name,
+.CatalogBlock .Catalog .Product .Product_count,
+.CatalogBlock .Catalog .Product .Product_price,
+.CatalogBlock .Catalog .Product .Product_residue {
     width: 25%;
     text-align: center;
 }
