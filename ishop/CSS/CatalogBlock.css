@@ -4,7 +4,6 @@
 }
 
 .CatalogBlock {
-    
     width: 90%;
     padding: 3px 0;
     background-color: #F0F0F0;
@@ -50,4 +49,5 @@
 .CatalogBlock .Catalog .Product .Product_residue {
     width: 25%;
     text-align: center;
+    line-height: 100px;
 }
