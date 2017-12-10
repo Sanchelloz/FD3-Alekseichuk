@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>ishop</title>
+</head>
+
+<body>
+    <div id="container"></div>
+
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+
+    <script src="JS/filter.js"></script>
+    <script src="JS/list.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="CSS/CatalogBlock.css" />
+
+    <script>
+        ReactDOM.render(
+            React.createElement(CatalogBlock, {
+                caption: captionText,
+                catalog: catalogArr,
+            }),
+            document.getElementById('container'),
+        );
+    </script>
+
+</body>
+
+</html>

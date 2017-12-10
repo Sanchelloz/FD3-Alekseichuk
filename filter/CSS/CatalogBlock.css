@@ -1,0 +1,53 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+}
+
+.CatalogBlock {
+    width: 90%;
+    padding: 3px 0;
+    background-color: #F0F0F0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.CatalogBlock .Caption {
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+.CatalogBlock .Catalog {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    width: 100%;
+}
+
+.CatalogBlock .Catalog .Product:nth-child(odd) {
+    background: rgb(147, 147, 153);
+}
+
+.CatalogBlock .Catalog .Product {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.CatalogBlock .Catalog .Product img {
+    width: 100px;
+    height: 100px;
+}
+
+.CatalogBlock .Catalog .Product .Product_name,
+.CatalogBlock .Catalog .Product .Product_count,
+.CatalogBlock .Catalog .Product .Product_price,
+.CatalogBlock .Catalog .Product .Product_residue {
+    width: 25%;
+    text-align: center;
+    line-height: 100px;
+}
