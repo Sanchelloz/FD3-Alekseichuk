@@ -1,34 +1,29 @@
-﻿var filter = React.createClass({
+﻿var wordsBlock = React.createClass({
 
-    displayName: 'filterText',
+    displayName: 'wordsBlock',
 
-    listFilter: React.PropTypes.arrayOf(
-        React.PropTypes.shape({
-            content: React.PropTypes.string.isRequired,
-            code: React.PropTypes.number.isRequired,
-        })
-    )
-},
+    propTypes: {
+        caption: React.PropTypes.string.isRequired,
+        //answers: React.PropTypes.array.isRequired,
 
-
-render: function() {
-
-    var catalogCode = this.props.catalog.map(v =>
-        React.DOM.div({ key: v.name, className: 'Product' },
-            React.DOM.div({ className: 'Product_name' }, v.name),
-            React.DOM.div({ className: 'Product_foto' },
-                React.DOM.img({ src: v.URL }),
-            ),
-
-            React.DOM.div({ className: 'Product_count' }, v.code),
-            React.DOM.div({ className: 'Product_price' }, v.price + ' руб'),
-            React.DOM.div({ className: 'Product_residue' }, v.residue),
-
+        catalog: React.PropTypes.arrayOf(
+            React.PropTypes.shape({
+                word: React.PropTypes.string.isRequired,
+                code: React.PropTypes.number.isRequired,
+            })
         )
-    );
-    return React.DOM.div({ className: 'CatalogBlock' },
-        React.DOM.div({ className: 'Caption' }, this.props.caption),
-        React.DOM.div({ className: 'Catalog' }, catalogCode),
-    );
-},
+    },
+    render: function() {
+
+        var wordsCode = this.props.words.map(v =>
+            React.DOM.div({ key: v.code, className: 'current_word' }, v.word, )
+        );
+
+        var filterBlock =
+
+            return React.DOM.div({ className: 'wordsBlock' },
+                React.DOM.div({ className: 'Caption' }, this.props.caption),
+                React.DOM.div({ className: 'Catalog' }, wordsCode),
+            );
+    },
 });

@@ -1,0 +1,25 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.Caption {
+    margin: 20px 0 50px 0;
+    font-weight: bold;
+    font-size: 19px;
+    text-align: center;
+}
+
+.Catalog {
+    width: 100px;
+    margin: 0 auto;
+    text-align: center;
+    height: 125px;
+    overflow-y: auto;
+    border: 1px green dashed;
+}
+
+.current_word {
+    line-height: 1.5
+}

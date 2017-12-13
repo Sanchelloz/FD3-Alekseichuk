@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>ishop</title>
+    <title>filter</title>
 </head>
 
 <body>
@@ -15,13 +15,13 @@
     <script src="JS/filter.js"></script>
     <script src="JS/list.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="CSS/CatalogBlock.css" />
+    <link rel="stylesheet" type="text/css" href="CSS/WordsBlock.css" />
 
     <script>
         ReactDOM.render(
-            React.createElement(CatalogBlock, {
+            React.createElement(wordsBlock, {
                 caption: captionText,
-                catalog: catalogArr,
+                words: wordsArr,
             }),
             document.getElementById('container'),
         );
