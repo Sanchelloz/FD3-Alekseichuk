@@ -4,36 +4,47 @@
 
     propTypes: {
         caption: React.PropTypes.string.isRequired,
-        //answers: React.PropTypes.array.isRequired,
+        
 
         catalog: React.PropTypes.arrayOf(
             React.PropTypes.shape({
                 word: React.PropTypes.string.isRequired,
                 code: React.PropTypes.number.isRequired,
                 freeWord: React.PropTypes.array.isRequired,
+                //workMode: React.PropTypes.number.isRequired,
             })
         )
     },
 
 
     getInitialState: function() {
-      return { freeWordsArr: [] };
+      return {
+        freeWordsArr: this.props.words,
+        wordContain: 'ё',
+      };
     },
 
-    freeWordsArrChanged: function(fwa) { 
-      console.log('WordsBlock: текст изменён - '+fwa); 
-      this.setState( [ {freeWord:fwa} ] );
+    processWords: function() {
+      var filterArr = [];
+      for (i=0; i<this.props.words.length; i++){
+
+        if ( this.props.words[i].indexOf(this.state.wordContain) != -1 ){
+
+          filterArr.push(wordContain)
+
+        };
+      }; 
+        
+        this.setState( {freeWordsArr: filterArr} )
+      
     },
+
 
     render: function() {
-
-        var wordsCode = this.props.words.map(v =>
+        var wordContain 
+        var wordsCode = this.state.freeWordsArr.map(v =>
             React.DOM.div({ key: v.code, className: 'current_word' }, v.word, )
         );
-
-        //var inputWindow = 
-
-        //var filterBlock =
 
             return React.DOM.div({ className: 'wordsBlock' },
                 React.DOM.div({ className: 'Caption' }, this.props.caption),
