@@ -23,3 +23,25 @@
 .current_word {
     line-height: 1.5
 }
+.WordsBlockFreeWord{
+    width: 200px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.FreeWord {
+    width: 110px;
+}
+.Btn{
+    width: 60px;
+    float: right;
+}
+.chkBox{
+    float: right;
+    margin: 0 2px 0 0;
+    padding: 0;
+    width: 21px;
+    height: 21px;
+    background: yellow;
+}
