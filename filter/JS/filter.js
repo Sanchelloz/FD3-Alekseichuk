@@ -28,68 +28,71 @@
     getInitialState: function() {
         return {
             freeWordsArr: this.props.words,
-            wordContain: 'а',
-            isSorted: false,
+            wordContain: '  ',
+            //sorted: false,
         };
     },
 
     processWords: function() {
-        
-        console.log(this.state.isSorted+"_начало");
+
         var processedArr = [];
-        
+
         var str = this.state.wordContain;
+        if (str != null && typeof str !== undefined) {
+            str = str.trim();
+        };
+        if (!str) {
+            processedArr = this.state.freeWordsArr;
+        };
+
         var checked = document.getElementsByClassName('chkBox');
-        if ( (checked["0"].checked == false)&&(str) ){
 
-          if (processedArr == []) {
-            processedArr = this.state.freeWordsArr;
-          };
-          
-          for (i = 0; i < this.state.freeWordsArr.length; i++) {
-                 if ((this.props.words[i].word).indexOf(str) != -1)
+        if ((checked["0"].checked == false) && (str)) {
+
+            for (i = 0; i < this.state.freeWordsArr.length; i++) {
+                if ((this.props.words[i].word).indexOf(str) != -1)
                     processedArr.push(this.props.words[i])
-
-              };
-          if (processedArr.length == 0) {
-            processedArr = this.state.freeWordsArr;
-          } 
-
-          this.setState({ freeWordsArr: processedArr });
-
-        } else if ( (checked["0"].checked != false)&&(str) ){
-
-          if (processedArr == []) {
-            processedArr = this.state.freeWordsArr;
-          };
-          
-          for (i = 0; i < this.state.freeWordsArr.length; i++) {
-
-            if ((this.props.words[i].word).indexOf(str) != -1)
-                processedArr.push(this.props.words[i])
             };
 
-          if (processedArr == []) {
-            processedArr = this.state.freeWordsArr;
-          };
+            this.setState({ freeWordsArr: processedArr });
 
-          processedArr.sort(function(a, b) {
-              if (a.word > b.word) {
-                  return 1;
-              }
-              if (a.word < b.word) {
-                  return -1;
-              }
-              return 0;
-          });
+        } else if ((checked["0"].checked != false) && (str)) {
 
-          this.setState({ freeWordsArr: processedArr });
+            for (i = 0; i < this.state.freeWordsArr.length; i++) {
 
-        }
+                if ((this.props.words[i].word).indexOf(str) != -1)
+                    processedArr.push(this.props.words[i])
+            };
+
+            processedArr.sort(function(a, b) {
+                if (a.word > b.word) {
+                    return 1;
+                }
+                if (a.word < b.word) {
+                    return -1;
+                }
+                return 0;
+            });
+
+            this.setState({ freeWordsArr: processedArr });
+
+        } else if ((checked["0"].checked != false) && (!str)) {
+
+            processedArr.sort(function(a, b) {
+                if (a.word > b.word) {
+                    return 1;
+                }
+                if (a.word < b.word) {
+                    return -1;
+                }
+                return 0;
+            });
+
+            this.setState({ freeWordsArr: processedArr });
+
+        } else this.setState({ freeWordsArr: this.props.words });
 
     },
-
-
 
     render: function() {
 
@@ -119,7 +122,7 @@
                     value: 'isSorted',
                     name: 'isSorted',
                     className: 'chkBox',
-                    onClick: this.processWords,
+                    //onClick: this.processWords,
                 }),
             ),
             React.DOM.div({ className: 'Catalog' }, wordsCode),
