@@ -29,44 +29,64 @@
         return {
             freeWordsArr: this.props.words,
             wordContain: 'а',
-            sorted: false,
+            isSorted: false,
         };
     },
 
     processWords: function() {
+        
+        console.log(this.state.isSorted+"_начало");
+        var processedArr = [];
+        
+        var str = this.state.wordContain;
+        var checked = document.getElementsByClassName('chkBox');
+        if ( (checked["0"].checked == false)&&(str) ){
 
-        var filterArr = [];
+          if (processedArr == []) {
+            processedArr = this.state.freeWordsArr;
+          };
+          
+          for (i = 0; i < this.state.freeWordsArr.length; i++) {
+                 if ((this.props.words[i].word).indexOf(str) != -1)
+                    processedArr.push(this.props.words[i])
 
+              };
+          if (processedArr.length == 0) {
+            processedArr = this.state.freeWordsArr;
+          } 
 
-        if (!this.state.sorted) {
-            console.log(this.state.sorted);
+          this.setState({ freeWordsArr: processedArr });
 
-            (this.state.freeWordsArr).sort(function(a, b) {
-                if (a.word > b.word) {
-                    return 1;
-                }
-                if (a.word < b.word) {
-                    return -1;
-                }
+        } else if ( (checked["0"].checked != false)&&(str) ){
 
-                return 0;
-            });
-            this.state.sorted = true;
-        };
+          if (processedArr == []) {
+            processedArr = this.state.freeWordsArr;
+          };
+          
+          for (i = 0; i < this.state.freeWordsArr.length; i++) {
 
-        if (this.state.wordContain) {
-
-            for (i = 0; i < this.props.words.length; i++) {
-
-                if ((this.props.words[i].word).indexOf(this.state.wordContain) != -1) {
-
-                    filterArr.push(this.props.words[i])
-
-                };
+            if ((this.props.words[i].word).indexOf(str) != -1)
+                processedArr.push(this.props.words[i])
             };
 
-            this.setState({ freeWordsArr: filterArr })
+          if (processedArr == []) {
+            processedArr = this.state.freeWordsArr;
+          };
+
+          processedArr.sort(function(a, b) {
+              if (a.word > b.word) {
+                  return 1;
+              }
+              if (a.word < b.word) {
+                  return -1;
+              }
+              return 0;
+          });
+
+          this.setState({ freeWordsArr: processedArr });
+
         }
+
     },
 
 
