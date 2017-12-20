@@ -10,60 +10,54 @@
             React.PropTypes.shape({
                 words: React.PropTypes.string.isRequired,
                 code: React.PropTypes.number.isRequired,
-                freeWord: React.PropTypes.array.isRequired,
-                //workMode: React.PropTypes.number.isRequired,
                 wordContain: React.PropTypes.string.isRequired,
-                cbFreeWordTextChanged: React.PropTypes.string.isRequired,
-                sorted: React.PropTypes.boolean,
+                isSorted: React.PropTypes.boolean,
             })
         )
     },
 
-    /*    freeWordTextChanged: function(EO) { 
-           
-          this.props.cbFreeWordTextChanged(EO.target.value);
-
-        },*/
-
     getInitialState: function() {
         return {
             freeWordsArr: this.props.words,
-            wordContain: '  ',
-            //sorted: false,
+            wordContain: '',
+            isSorted: false,
         };
     },
 
-    processWords: function() {
+    getSorteInfo: function(EO) {
+      this.setState({ isSorted: EO.target.checked }, this.processWords);
+    },
 
+    getString: function(EO) {
+      var freeText = EO.target.value;
+      this.setState({ wordContain: freeText+''}, this.processWords);
+    },
+
+    processWords: function() {
+      console.log(this.state.isSorted);
         var processedArr = [];
 
         var str = this.state.wordContain;
         if (str != null && typeof str !== undefined) {
+
             str = str.trim();
+
         };
+
         if (!str) {
-            processedArr = this.state.freeWordsArr;
+
+            processedArr = this.props.words.slice();
+
+        } else {
+
+            for (i = 0; i < this.props.words.length; i++) {
+                if ((this.props.words[i].word).indexOf(str) != -1)
+                    processedArr.push(this.props.words[i])
+            };
+            if (processedArr.length == 0) processedArr = this.props.words;
         };
 
-        var checked = document.getElementsByClassName('chkBox');
-
-        if ((checked["0"].checked == false) && (str)) {
-
-            for (i = 0; i < this.state.freeWordsArr.length; i++) {
-                if ((this.props.words[i].word).indexOf(str) != -1)
-                    processedArr.push(this.props.words[i])
-            };
-
-            this.setState({ freeWordsArr: processedArr });
-
-        } else if ((checked["0"].checked != false) && (str)) {
-
-            for (i = 0; i < this.state.freeWordsArr.length; i++) {
-
-                if ((this.props.words[i].word).indexOf(str) != -1)
-                    processedArr.push(this.props.words[i])
-            };
-
+        if (this.state.isSorted) {
             processedArr.sort(function(a, b) {
                 if (a.word > b.word) {
                     return 1;
@@ -73,25 +67,9 @@
                 }
                 return 0;
             });
+        };    
 
-            this.setState({ freeWordsArr: processedArr });
-
-        } else if ((checked["0"].checked != false) && (!str)) {
-
-            processedArr.sort(function(a, b) {
-                if (a.word > b.word) {
-                    return 1;
-                }
-                if (a.word < b.word) {
-                    return -1;
-                }
-                return 0;
-            });
-
-            this.setState({ freeWordsArr: processedArr });
-
-        } else this.setState({ freeWordsArr: this.props.words });
-
+        this.setState({ freeWordsArr: processedArr });
     },
 
     render: function() {
@@ -106,23 +84,17 @@
                 React.DOM.input({
                     type: 'text',
                     name: 'enterFreeWord',
-                    maxLength: "30",
+                    maxLength: "15",
                     className: 'FreeWord',
                     defaultValue: '',
-                    /*onChange:this.freeWordTextChanged,*/
-                }),
-                React.DOM.input({
-                    type: 'button',
-                    value: 'Enter',
-                    className: 'Btn',
-                    onClick: this.processWords,
+                    onChange:this.getString,
                 }),
                 React.DOM.input({
                     type: 'checkbox',
                     value: 'isSorted',
                     name: 'isSorted',
                     className: 'chkBox',
-                    //onClick: this.processWords,
+                    onChange: this.getSorteInfo,
                 }),
             ),
             React.DOM.div({ className: 'Catalog' }, wordsCode),
