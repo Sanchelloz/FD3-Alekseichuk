@@ -4,14 +4,13 @@
 
     propTypes: {
         caption: React.PropTypes.string.isRequired,
-
+        wordContain: React.PropTypes.string.isRequired,
+        isSorted: React.PropTypes.boolean,
 
         catalog: React.PropTypes.arrayOf(
             React.PropTypes.shape({
                 words: React.PropTypes.string.isRequired,
                 code: React.PropTypes.number.isRequired,
-                wordContain: React.PropTypes.string.isRequired,
-                isSorted: React.PropTypes.boolean,
             })
         )
     },
@@ -25,16 +24,16 @@
     },
 
     getSorteInfo: function(EO) {
-      this.setState({ isSorted: EO.target.checked }, this.processWords);
+        this.setState({ isSorted: EO.target.checked }, this.processWords);
     },
 
     getString: function(EO) {
-      var freeText = EO.target.value;
-      this.setState({ wordContain: freeText+''}, this.processWords);
+        var freeText = EO.target.value;
+        this.setState({ wordContain: freeText + '' }, this.processWords);
     },
 
     processWords: function() {
-      console.log(this.state.isSorted);
+        console.log(this.state.isSorted);
         var processedArr = [];
 
         var str = this.state.wordContain;
@@ -67,7 +66,7 @@
                 }
                 return 0;
             });
-        };    
+        };
 
         this.setState({ freeWordsArr: processedArr });
     },
@@ -87,7 +86,7 @@
                     maxLength: "15",
                     className: 'FreeWord',
                     defaultValue: '',
-                    onChange:this.getString,
+                    onChange: this.getString,
                 }),
                 React.DOM.input({
                     type: 'checkbox',
