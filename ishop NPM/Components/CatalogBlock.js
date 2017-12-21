@@ -1,10 +1,18 @@
-﻿var CatalogBlock = React.createClass({
+﻿import React from 'react';
+import PropTypes from 'prop-types';
+
+import './CSS/CatalogBlock.css';
+
+//import VotesQuestion from './VotesQuestion';
+//import VotesAnswer from './VotesAnswer';
+
+
+var CatalogBlock = React.createClass({
 
     displayName: 'CatalogBlock',
 
     propTypes: {
         caption: React.PropTypes.string.isRequired,
-        //answers: React.PropTypes.array.isRequired,
 
         catalog: React.PropTypes.arrayOf(
             React.PropTypes.shape({
@@ -22,14 +30,14 @@
         var catalogCode = this.props.catalog.map(v =>
             React.DOM.div({ key: v.name, className: 'Product' },
                 React.DOM.div({ className: 'Product_name' }, v.name),
-                React.DOM.div({ className: 'Product_foto' }, 
+                React.DOM.div({ className: 'Product_foto' },
                     React.DOM.img({ src: v.URL }),
                 ),
-                
+
                 React.DOM.div({ className: 'Product_count' }, v.code),
                 React.DOM.div({ className: 'Product_price' }, v.price + ' руб'),
                 React.DOM.div({ className: 'Product_residue' }, v.residue),
-                
+
             )
         );
         return React.DOM.div({ className: 'CatalogBlock' },
