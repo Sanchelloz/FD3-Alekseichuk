@@ -1,48 +1,48 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
 
-import './CSS/CatalogBlock.css';
+import './../CSS/CatalogBlock.css';
 
-//import VotesQuestion from './VotesQuestion';
-//import VotesAnswer from './VotesAnswer';
+//let captionText = 'Каталог товаров нашего магазина';
 
+class CatalogBlock extends React.Component {
 
-var CatalogBlock = React.createClass({
-
-    displayName: 'CatalogBlock',
-
-    propTypes: {
+    static propTypes = {
         caption: React.PropTypes.string.isRequired,
 
-        catalog: React.PropTypes.arrayOf(
-            React.PropTypes.shape({
-                name: React.PropTypes.string.isRequired,
-                URL: React.PropTypes.string.isRequired,
-                code: React.PropTypes.number.isRequired,
-                price: React.PropTypes.number.isRequired,
-                residue: React.PropTypes.number.isRequired,
+        catalog: PropTypes.arrayOf(
+            PropTypes.shape({
+                name: PropTypes.string.isRequired,
+                URL: PropTypes.string.isRequired,
+                code: PropTypes.number.isRequired,
+                price: PropTypes.number.isRequired,
+                residue: PropTypes.number.isRequired,
             })
-        )
-    },
+        ),
+    };
 
-    render: function() {
+
+    render() {
 
         var catalogCode = this.props.catalog.map(v =>
-            React.DOM.div({ key: v.name, className: 'Product' },
-                React.DOM.div({ className: 'Product_name' }, v.name),
-                React.DOM.div({ className: 'Product_foto' },
-                    React.DOM.img({ src: v.URL }),
-                ),
+                <
+                key: v.name, className: 'Product'
+            },
+            DOM.div({ className: 'Product_name' }, v.name),
+            DOM.div({ className: 'Product_foto' },
+                DOM.img({ src: v.URL }),
+            ),
 
-                React.DOM.div({ className: 'Product_count' }, v.code),
-                React.DOM.div({ className: 'Product_price' }, v.price + ' руб'),
-                React.DOM.div({ className: 'Product_residue' }, v.residue),
+            DOM.div({ className: 'Product_count' }, v.code),
+            DOM.div({ className: 'Product_price' }, v.price + ' руб'),
+            DOM.div({ className: 'Product_residue' }, v.residue) /
+            >
+    );
+    return React.DOM.div({ className: 'CatalogBlock' },
+        React.DOM.div({ className: 'Caption' }, this.props.caption),
+        React.DOM.div({ className: 'Catalog' }, catalogCode),
+    );
+}
+};
 
-            )
-        );
-        return React.DOM.div({ className: 'CatalogBlock' },
-            React.DOM.div({ className: 'Caption' }, this.props.caption),
-            React.DOM.div({ className: 'Catalog' }, catalogCode),
-        );
-    },
-});
+export default CatalogBlock;

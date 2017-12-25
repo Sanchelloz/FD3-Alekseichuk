@@ -6,26 +6,25 @@ const extractCSS = new ExtractTextPlugin({
     filename: "bundle.css"
 });
 
-module.exports = { 
+module.exports = {
     entry: "./App.js", // основной файл приложения
-    output:{ 
+    output: {
         path: __dirname, // путь к каталогу выходных файлов
-        filename: "bundle.js"  // название создаваемого файла 
-    }, 
-    module:{ 
-        rules:[
-            { 
+        filename: "bundle.js" // название создаваемого файла 
+    },
+    module: {
+        rules: [{
                 test: /\.jsx?$/, // какие файлы обрабатывать
                 exclude: /node_modules/, // какие файлы пропускать
                 use: { loader: "babel-loader" }
             },
             {
-                test: /\.css/.css$/,
+                test: /\.css$/,
                 use: extractCSS.extract({
                     use: ["css-loader"]
                 })
-            }            
-        ] 
+            }
+        ]
     },
     plugins: [
         extractCSS
