@@ -2,13 +2,14 @@
 import PropTypes from 'prop-types';
 
 import './../CSS/CatalogBlock.css';
+import ItemBlock from './ItemBlock';
 
 //let captionText = 'Каталог товаров нашего магазина';
 
 class CatalogBlock extends React.Component {
 
     static propTypes = {
-        caption: React.PropTypes.string.isRequired,
+        caption: PropTypes.string.isRequired,
 
         catalog: PropTypes.arrayOf(
             PropTypes.shape({
@@ -24,25 +25,22 @@ class CatalogBlock extends React.Component {
 
     render() {
 
-        var catalogCode = this.props.catalog.map(v =>
-                <
-                key: v.name, className: 'Product'
-            },
-            DOM.div({ className: 'Product_name' }, v.name),
-            DOM.div({ className: 'Product_foto' },
-                DOM.img({ src: v.URL }),
-            ),
+      var catalogCode = this.props.catalog.map(v =>
+        <ItemBlock key={v.code}
+          name={v.name} URL={v.URL}
+          code={v.code} price={v.price}
+          residue={v.residue}
+          caption={this.props.caption}
+        />
+      );
 
-            DOM.div({ className: 'Product_count' }, v.code),
-            DOM.div({ className: 'Product_price' }, v.price + ' руб'),
-            DOM.div({ className: 'Product_residue' }, v.residue) /
-            >
+    return (
+    <div className='CatalogBlock'>
+      <div className='Caption'> {this.props.caption} </div>
+      <div className='Catalog'> {catalogCode} </div>
+    </div>
     );
-    return React.DOM.div({ className: 'CatalogBlock' },
-        React.DOM.div({ className: 'Caption' }, this.props.caption),
-        React.DOM.div({ className: 'Catalog' }, catalogCode),
-    );
+  }
 }
-};
 
 export default CatalogBlock;

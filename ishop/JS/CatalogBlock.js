@@ -20,7 +20,7 @@
     render: function() {
 
         var catalogCode = this.props.catalog.map(v =>
-            React.DOM.div({ key: v.name, className: 'Product' },
+            React.DOM.div({ key: v.code, className: 'Product' },
                 React.DOM.div({ className: 'Product_name' }, v.name),
                 React.DOM.div({ className: 'Product_foto' }, 
                     React.DOM.img({ src: v.URL }),
