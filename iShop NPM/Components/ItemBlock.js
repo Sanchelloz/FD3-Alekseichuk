@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import './../CSS/ItemBlock.css';
 
-//let captionText = 'Каталог товаров нашего магазина';
-
 class ItemBlock extends React.Component {
 
     static propTypes = {
@@ -15,22 +13,26 @@ class ItemBlock extends React.Component {
           code: PropTypes.number.isRequired,
           price: PropTypes.number.isRequired,
           residue: PropTypes.number.isRequired,
+          selected: PropTypes.boolean,
         })
       ),
     };
 
     render() {
     return (
-
-    <div className='Product'>
-      <div className='Product_name'>{this.props.name}</div>
-      <div className='Product_foto'>
-        <img src={this.props.URL}/>
-      </div>
-      <div className='Product_count'>{this.props.code}</div>
-      <div className='Product_price'>{this.props.price + ' руб'}</div>
-      <div className='Product_residue'>{this.props.residue}</div>
-    </div>
+    
+      <tr className='Product'>
+        <td className='Product_name'>{this.props.name}</td>
+        <td className='Product_foto'>
+          <img src={this.props.URL}/>
+        </td>
+        <td className='Product_count'>{this.props.code}</td>
+        <td className='Product_price'>{this.props.price}</td>
+        <td className='Product_residue'>{this.props.residue}</td>
+        <td className='Product_residue'><button>Редактировать</button></td>
+        <td className='Product_residue'><button>Удалить</button></td>
+      </tr>
+    
     );
   }
 };

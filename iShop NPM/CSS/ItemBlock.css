@@ -1,4 +1,4 @@
-.CatalogBlock .Catalog .Product:nth-child(odd) {
+/*.CatalogBlock .Catalog .Product:nth-child(odd) {
     background: rgb(147, 147, 153);
 }
 
@@ -22,4 +22,32 @@
     width: 25%;
     text-align: center;
     line-height: 100px;
+}
+
+
+
+.CatalogBlock .Catalog .Product:nth-child(odd) {
+    background: rgb(147, 147, 153);
+}*/
+
+.CatalogBlock .Catalog table tbody tr td{
+  
+  border-bottom: solid 1px gray;
+  box-sizing: border-box;
+}
+.CatalogBlock .Catalog .Product img {
+    width: 60px;
+    display: inline-block;
+}
+
+.CatalogBlock .Catalog .Product .Product_name,
+.CatalogBlock .Catalog .Product .Product_count,
+.CatalogBlock .Catalog .Product .Product_price,
+.CatalogBlock .Catalog .Product .Product_residue,
+.CatalogBlock .Catalog .Product .Product_foto {
+    width: 150px;
+    text-align: center;  
+}
+.CatalogBlock .Catalog .Product .Product_foto {
+    padding-top: 5px;  
 }

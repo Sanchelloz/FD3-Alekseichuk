@@ -8,20 +8,24 @@ import ItemBlock from './ItemBlock';
 
 class CatalogBlock extends React.Component {
 
-    static propTypes = {
-        caption: PropTypes.string.isRequired,
-
-        catalog: PropTypes.arrayOf(
-            PropTypes.shape({
-                name: PropTypes.string.isRequired,
-                URL: PropTypes.string.isRequired,
-                code: PropTypes.number.isRequired,
-                price: PropTypes.number.isRequired,
-                residue: PropTypes.number.isRequired,
-            })
-        ),
-    };
-
+  static propTypes = {
+    caption: PropTypes.string.isRequired,
+    ModalWorkMode: PropTypes.number.isRequired,
+    selectedRowCode: PropTypes.number.isRequired,
+    catalog: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            URL: PropTypes.string.isRequired,
+            code: PropTypes.number.isRequired,
+            price: PropTypes.number.isRequired,
+            residue: PropTypes.number.isRequired,
+        })
+    ),
+  };
+  state = {
+    selectedRowCode: null,
+    ModalWorkMode: 0,
+  }
 
     render() {
 
@@ -37,7 +41,25 @@ class CatalogBlock extends React.Component {
     return (
     <div className='CatalogBlock'>
       <div className='Caption'> {this.props.caption} </div>
-      <div className='Catalog'> {catalogCode} </div>
+      <div className='Catalog'>
+        <table>
+          <thead>
+            <tr>
+              <th>Наименование</th>
+              <th>Фото</th>
+              <th>Код товара</th>
+              <th>Цена, руб</th>
+              <th>Остаток на складе</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>{catalogCode}</tbody>
+        </table>
+      </div>
+      <div className='NewBtn'>
+        <button>Добавить товар</button>
+      </div>
     </div>
     );
   }
