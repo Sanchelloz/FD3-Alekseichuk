@@ -19,10 +19,6 @@ class ItemBlock extends React.Component {
     ),
   };
 
-/*  state = {
-    selectedRow: false,
-  };*/
-
   rowClicked = (EO) => {
     this.props.cbSelected(this.props.code);
 
@@ -32,7 +28,7 @@ class ItemBlock extends React.Component {
 
     return (
     
-      <tr className='Product' onClick={this.rowClicked}>
+      <tr className={(this.props.selectedRow)?'Product SelectedRow':'Product'} onClick={this.rowClicked}>
         <td className='Product_name'>{this.props.name}</td>
         <td className='Product_foto'>
           <img src={this.props.URL}/>

@@ -13,6 +13,7 @@ class CatalogBlock extends React.Component {
     caption: PropTypes.string.isRequired,
     //ModalWorkMode: PropTypes.number.isRequired,
     selectedRowCode: PropTypes.number,
+    selectedRow: PropTypes.bool,
     catalog: PropTypes.arrayOf(
         PropTypes.shape({
             name: PropTypes.string.isRequired,
@@ -36,8 +37,8 @@ class CatalogBlock extends React.Component {
 
   render() {
 
-//if (this.state.selectedRowCode == this.props.code)
-
+    if (this.state.selectedRowCode == this.props.code) selectedRow=true;
+    
     var catalogCode = this.props.catalog.map(v =>
       <ItemBlock key={v.code}
         name={v.name} URL={v.URL}
@@ -45,11 +46,11 @@ class CatalogBlock extends React.Component {
         residue={v.residue}
         caption={this.props.caption}
         cbSelected={this.rowSelected}
-
+        selectedRow
       />
     );
     
-     
+    
 
     return (
     <div className='CatalogBlock'>
