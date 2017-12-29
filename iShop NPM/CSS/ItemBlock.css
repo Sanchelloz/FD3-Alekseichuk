@@ -51,3 +51,7 @@
 .CatalogBlock .Catalog .Product .Product_foto {
     padding-top: 5px;  
 }
+
+.SelectedRow {
+    background: lightblue;
+}

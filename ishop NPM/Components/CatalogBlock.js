@@ -1,8 +1,9 @@
-﻿import React from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import './../CSS/CatalogBlock.css';
 import ItemBlock from './ItemBlock';
+//import ModalWindow from './ModalWindow';
 
 //let captionText = 'Каталог товаров нашего магазина';
 
@@ -10,8 +11,8 @@ class CatalogBlock extends React.Component {
 
   static propTypes = {
     caption: PropTypes.string.isRequired,
-    ModalWorkMode: PropTypes.number.isRequired,
-    selectedRowCode: PropTypes.number.isRequired,
+    //ModalWorkMode: PropTypes.number.isRequired,
+    selectedRowCode: PropTypes.number,
     catalog: PropTypes.arrayOf(
         PropTypes.shape({
             name: PropTypes.string.isRequired,
@@ -22,21 +23,33 @@ class CatalogBlock extends React.Component {
         })
     ),
   };
+  
   state = {
     selectedRowCode: null,
     ModalWorkMode: 0,
-  }
+  };
 
-    render() {
+  rowSelected = (code) => {
+    console.log('выбрана строка с кодом '+code);
+    this.setState( {selectedRowCode:code} );
+  };
 
-      var catalogCode = this.props.catalog.map(v =>
-        <ItemBlock key={v.code}
-          name={v.name} URL={v.URL}
-          code={v.code} price={v.price}
-          residue={v.residue}
-          caption={this.props.caption}
-        />
-      );
+  render() {
+
+//if (this.state.selectedRowCode == this.props.code)
+
+    var catalogCode = this.props.catalog.map(v =>
+      <ItemBlock key={v.code}
+        name={v.name} URL={v.URL}
+        code={v.code} price={v.price}
+        residue={v.residue}
+        caption={this.props.caption}
+        cbSelected={this.rowSelected}
+
+      />
+    );
+    
+     
 
     return (
     <div className='CatalogBlock'>
@@ -62,6 +75,7 @@ class CatalogBlock extends React.Component {
       </div>
     </div>
     );
+
   }
 }
 
