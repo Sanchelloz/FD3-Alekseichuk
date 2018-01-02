@@ -6,7 +6,7 @@ import './../CSS/ModalWindow.css';
 class ModalWindow extends React.Component {
 
   static propTypes = {
-  	WorkMode: PropTypes.number.isRequired, //"0" - окно закрыто,
+    WorkMode: PropTypes.number, //"0" - окно закрыто,
   									//"1" - режим просмотра, "2" - режим редактирования
     catalog: PropTypes.arrayOf(					
       PropTypes.shape({
@@ -20,38 +20,50 @@ class ModalWindow extends React.Component {
     ),
   };
 
-  state = {
+/*  state = {
     newName: string,
     newURL: 0,
     newCode: 0,
     newPrice: 0,
     newResidue: 0
-  };
+  };*/
   render() {
     return (
-    	if (WorkMode == 1) {
-  			<div className='Product_modal'>
-  			  <div className='Product_name_modal'>{this.props.name}</div>
-  			  <div className='Product_foto_modal'>
-  			    <img src={this.props.URL}/>
-  			  </div>
-  			  <div className='Product_count_modal'>{this.props.code}</div>
-  			  <div className='Product_price_modal'>{this.props.price + ' руб'}</div>
-  			  <div className='Product_residue_modal'>{this.props.residue}</div>
-  			</div>
-     	} else if (WorkMode == 2) {
-       	<div className='Product_modal'>
-     	    <input type='text' defaultValue={this.props.name}/>
-      	  <input type='text' defaultValue={this.props.URL}/>
-      	  <input type='text' defaultValue={this.props.code}/>
-      	  <input type='text' defaultValue={this.props.price}/>
-          <input type='text' defaultValue={this.props.residue}/>
-      	  
-      	  <div className='Save_position'>
-      	  	<button>Сохранить</button>
-      	  </div>
-      	</div>
-      }
+    	<form>
+        <label for="Product_name" class="Divlabel"> Наименование товара: </label>
+        <input type="text" class="Product_name" placeholder = 'Наименование' defaultValue = { this.props.name }
+        onBlur="isValidateName(value)"/>
+        <span class="ValidText"></span>
+        <br/>
+
+        <label for="Product_foto" class="Divlabel"> Наименование товара: </label>
+        <input type="text" class="Product_foto" placeholder = 'URL ссылка на фото' defaultValue = { this.props.URL }
+        onBlur="isValidateName(value)"/>
+        <span class="ValidURL"></span>
+        <br/>
+
+        <label for="Product_count" class="Divlabel"> Код товара: </label>
+        <input type="text" class="Product_count" placeholder = 'Код товара' defaultValue = { this.props.code }
+        onblur="isValidateNumbert(value)"/>
+        <span id="ValidNumber"></span>
+        <br/>
+
+        <label for="Product_price" class="Divlabel"> Код товара: </label>
+        <input type="text" class="Product_price" placeholder = 'Цена' defaultValue = { this.props.price + ' руб'}
+        onblur="isValidateNumbert(value)"/>
+        <span id="ValidNumber"></span>
+        <br/>
+
+        <label for="Product_residue" class="Divlabel"> Код товара: </label>
+        <input type="text" class="Product_residue" placeholder = 'Остаток' defaultValue = { this.props.price }
+        onblur="isValidateNumbert(value)"/>
+        <span id="ValidNumber"></span>
+
+        <input type='submit' value='Сохранить'/>
+        <input type='submit' value='Отмена'/>
+  
+      </form>
+
     );
   }
 };
