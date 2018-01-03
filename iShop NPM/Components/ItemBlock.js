@@ -21,13 +21,14 @@ class ItemBlock extends React.Component {
     };
 
     rowClicked = (EO) => {
-        this.props.cbSelected(this.props.code);
+        this.props.cbSelected(this.props.name, this.props.URL, this.props.code,
+        this.props.price, this.props.residue);
 
     };
 
     editItem = (EO) => {
-        this.props.cbEditItem( this.props.name, this.props.code, this.props.URL,
-        this.props.code, this.props.price, this.props.residue );
+        this.props.cbEditItem( this.props.name, this.props.URL, this.props.code,
+        this.props.price, this.props.residue );
     }
 
     deleteItem = (EO) => {

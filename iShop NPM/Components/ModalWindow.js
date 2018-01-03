@@ -32,7 +32,7 @@ class ModalWindow extends React.Component {
 
   render() {
 
-    if ( this.props.WorkMode == 0 ) {
+    if ( this.props.WorkMode == 1 ) {
     return (
       
     	<form>
@@ -54,7 +54,7 @@ class ModalWindow extends React.Component {
         <span className='ValidNumber'>Данные не верны</span>
         <br/>
 
-        <label htmlFor='Product_price' className='Divlabel'> Код товара: </label>
+        <label htmlFor='Product_price' className='Divlabel'> Цена: </label>
         <input type='text' className='Product_price' readOnly value = { this.props.selectedPrice + ' руб'}
         />
         <span className='ValidNumber'>Данные не верны</span>
@@ -64,7 +64,9 @@ class ModalWindow extends React.Component {
         <input type='text' className='Product_residue' readOnly value = { this.props.selectedResidue }
         />
         <span className='ValidNumber'></span>
-
+        <div className='Block_btn'>
+          <input type='submit' value='Отмена' onClick = { this.closeWindow }/>
+        </div>
       </form>
 
       )
@@ -91,7 +93,7 @@ class ModalWindow extends React.Component {
         <span className='ValidNumber'>Данные не верны</span>
         <br/>
 
-        <label htmlFor='Product_price' className='Divlabel'> Код товара: </label>
+        <label htmlFor='Product_price' className='Divlabel'> Цена: </label>
         <input type='text' className='Product_price' placeholder = 'Цена' defaultValue = { this.props.selectedPrice + ' руб'}
         />
         <span className='ValidNumber'>Данные не верны</span>

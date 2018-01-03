@@ -33,17 +33,22 @@ class CatalogBlock extends React.Component {
 			selectedProductURL: '',
 			selectedCount: null,
 			selectedResidue: null,
-      selectedPrice: null,
+      selectedPrice: 0,
 			selectedResidue: null,
 			
     };
 
-    rowSelected = (code) => {
+    rowSelected = (name, URL, code, price, residue) => {
         console.log('выбрана строка с кодом ' + code);
         this.setState({ selectedRowCode: code });
-        //this.setState({ ModalWorkMode: 1 });
+        this.setState({ ModalWorkMode: 1 });
+        this.setState({ selectedName: name });
+        this.setState({ selectedProductURL: URL });
+        this.setState({ selectedCount: code });
+        this.setState({ selectedPrice: price });
+        this.setState({ selectedResidue: residue });
     };
-
+//workMode = { this.state.workMode }
     render() {
 
 
@@ -62,9 +67,9 @@ class CatalogBlock extends React.Component {
 					/>
 				);
 				var InfoWindow = <ModalWindow key = { this.state.selectedRowCode }
-            workMode = { this.state.ModalWorkMode }
+            WorkMode = { this.state.ModalWorkMode }
             selectedName = { this.state.selectedName }
-            selectedProductURL = { this.state.selectedProductFoto }
+            selectedProductURL = { this.state.selectedProductURL }
             selectedRowCode = { this.state.selectedRowCode }
             selectedPrice = { this.state.selectedPrice }
             selectedResidue = { this.state.selectedResidue }
@@ -72,8 +77,7 @@ class CatalogBlock extends React.Component {
             //cbCloseWindow = {}
             />
 
-      /* cbSelected = { this.rowSelected }
-        selectedRow = { this.state.selectedRowCode == v.code } */
+
         return ( <div className = 'CatalogBlock' >
           <div className = 'Caption' > { this.props.caption } </div>
 					<div className = 'Catalog' >
