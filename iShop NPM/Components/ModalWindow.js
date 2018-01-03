@@ -8,6 +8,8 @@ class ModalWindow extends React.Component {
   static propTypes = {
     WorkMode: PropTypes.number, //"0" - окно закрыто,
   									//"1" - режим просмотра, "2" - режим редактирования
+    cbSaveItem: PropTypes.func.isRequired,
+    cbCloseWindow: PropTypes.func.isRequired,
     catalog: PropTypes.arrayOf(					
       PropTypes.shape({
         selectedName: PropTypes.string.isRequired,
@@ -15,50 +17,102 @@ class ModalWindow extends React.Component {
         selectedRowCode: PropTypes.number.isRequired,
         selectedPrice: PropTypes.number.isRequired,
         selectedResidue: PropTypes.number.isRequired,
-        workMode: PropTypes.number,
+        
       })
     ),
   };
 
+  saveItem = (EO) => {
+      this.props.cbSaveItem();
+  };
+
+  closeWindow = (EO) => {
+      this.props.cbCloseWindow();
+  };
+
   render() {
+
+    if ( this.props.WorkMode == 0 ) {
     return (
+      
     	<form>
-        <label for='Product_name' class='Divlabel'> Наименование товара: </label>
-        <input type='text' class='Product_name' placeholder = 'Наименование' defaultValue = { this.props.selectedName }
+        <label htmlFor='Product_name' className='Divlabel'> Наименование товара: </label>
+        <input type='text' className='Product_name' readOnly value = { this.props.selectedName }
         />
-        <span class="ValidText"></span>
+        <span className="ValidText">Данные не верны</span>
         <br/>
 
-        <label for='Product_foto' class='Divlabel'> URL-адрес фото: </label>
-        <input type='text' class='Product_foto' placeholder = 'URL ссылка на фото' defaultValue = { this.props.selectedProductURL }
+        <label htmlFor='Product_foto' className='Divlabel'> URL-адрес фото: </label>
+        <input type='text' className='Product_foto' readOnly value = { this.props.selectedProductURL }
         />
-        <span class='ValidURL'></span>
+        <span className='ValidURL'>Данные не верны</span>
         <br/>
 
-        <label for='Product_count' class='Divlabel'> Код товара: </label>
-        <input type='text' class='Product_count' placeholder = 'Код товара' defaultValue = { this.props.selectedRowCode }
+        <label htmlFor='Product_count' className='Divlabel'> Код товара: </label>
+        <input type='text' className='Product_count' readOnly value = { this.props.selectedRowCode }
         />
-        <span id='ValidNumber'></span>
+        <span className='ValidNumber'>Данные не верны</span>
         <br/>
 
-        <label for='Product_price' class='Divlabel'> Код товара: </label>
-        <input type='text' class='Product_price' placeholder = 'Цена' defaultValue = { this.props.selectedPrice + ' руб'}
+        <label htmlFor='Product_price' className='Divlabel'> Код товара: </label>
+        <input type='text' className='Product_price' readOnly value = { this.props.selectedPrice + ' руб'}
         />
-        <span id='ValidNumber'></span>
+        <span className='ValidNumber'>Данные не верны</span>
         <br/>
 
-        <label for='Product_residue' class='Divlabel'> Код товара: </label>
-        <input type='text' class='Product_residue' placeholder = 'Остаток' defaultValue = { this.props.selectedResidue }
+        <label htmlFor='Product_residue' className='Divlabel'> Остаток товара на складе: </label>
+        <input type='text' className='Product_residue' readOnly value = { this.props.selectedResidue }
         />
-        <span id='ValidNumber'></span>
+        <span className='ValidNumber'></span>
 
-        <input type='submit' value='Сохранить'/>
-        <input type='submit' value='Отмена'/>
-  
       </form>
 
-    );
+      )
+
+    }  else if ( this.props.WorkMode == 2 ) {
+    return (
+      
+      <form>
+        <label htmlFor='Product_name' className='Divlabel'> Наименование товара: </label>
+        <input type='text' className='Product_name' placeholder = 'Наименование' defaultValue = { this.props.selectedName }
+        />
+        <span className="ValidText">Данные не верны</span>
+        <br/>
+
+        <label htmlFor='Product_foto' className='Divlabel'> URL-адрес фото: </label>
+        <input type='text' className='Product_foto' placeholder = 'URL ссылка на фото' defaultValue = { this.props.selectedProductURL }
+        />
+        <span className='ValidURL'>Данные не верны</span>
+        <br/>
+
+        <label htmlFor='Product_count' className='Divlabel'> Код товара: </label>
+        <input type='text' className='Product_count' placeholder = 'Код товара' defaultValue = { this.props.selectedRowCode }
+        />
+        <span className='ValidNumber'>Данные не верны</span>
+        <br/>
+
+        <label htmlFor='Product_price' className='Divlabel'> Код товара: </label>
+        <input type='text' className='Product_price' placeholder = 'Цена' defaultValue = { this.props.selectedPrice + ' руб'}
+        />
+        <span className='ValidNumber'>Данные не верны</span>
+        <br/>
+
+        <label htmlFor='Product_residue' className='Divlabel'> Остаток товара на складе: </label>
+        <input type='text' className='Product_residue' readOnly placeholder = 'Остаток' value = { this.props.selectedResidue }
+        />
+        <span className='ValidNumber'></span>
+        <br/>
+        <div className='Block_btn'>
+          <input type='submit' value='Сохранить' onClick = { this.saveItem }/>
+          <input type='submit' value='Отмена' onClick = { this.closeWindow }/>
+        </div>
+      </form>
+
+      ) } else return (
+      <form>
+      </form>
+      )
   }
 };
 
-export default ItemBlock;
+export default ModalWindow;

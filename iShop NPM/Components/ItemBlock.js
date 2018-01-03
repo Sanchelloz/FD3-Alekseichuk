@@ -8,7 +8,7 @@ class ItemBlock extends React.Component {
     static propTypes = {
         cbSelected: PropTypes.func.isRequired,
 				selectedRow: PropTypes.bool,
-				workMode: PropTypes.number.isRequired,
+				
         catalog: PropTypes.arrayOf(
             PropTypes.shape({
                 name: PropTypes.string.isRequired,
@@ -25,6 +25,14 @@ class ItemBlock extends React.Component {
 
     };
 
+    editItem = (EO) => {
+        this.props.cbEditItem( this.props.name, this.props.code, this.props.URL,
+        this.props.code, this.props.price, this.props.residue );
+    }
+
+    deleteItem = (EO) => {
+        this.props.cbDeletedItem(this.props.code);
+    }
     render() {
 
         return (
@@ -34,9 +42,11 @@ class ItemBlock extends React.Component {
             <td className = 'Product_count' > { this.props.code } </td>
             <td className = 'Product_price'> { this.props.price } </td>
             <td className = 'Product_residue'> { this.props.residue } </td>
-            < button > Редактировать </button>
-            <td className = 'Product_residue'>
-            < button > Удалить </button>
+            <td>
+              < button onClick = { this.editItem }> Редактировать </button>
+            </td>
+            <td>
+              < button onClick = { this.deleteItem }> Удалить </button>
             </td>
           </tr>
         )

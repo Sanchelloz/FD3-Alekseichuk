@@ -11,10 +11,10 @@ class CatalogBlock extends React.Component {
 
     static propTypes = {
         caption: PropTypes.string.isRequired,
-        ModalWorkMode: PropTypes.number.isRequired,
+        ModalWorkMode: PropTypes.number,
         selectedRowCode: PropTypes.number,
 				selectedRow: PropTypes.bool,
-				startWorkMode: PropTypes.number.isRequired,
+				
         catalog: PropTypes.arrayOf(
             PropTypes.shape({
                 name: PropTypes.string.isRequired,
@@ -41,9 +41,9 @@ class CatalogBlock extends React.Component {
     rowSelected = (code) => {
         console.log('выбрана строка с кодом ' + code);
         this.setState({ selectedRowCode: code });
-        this.setState({ ModalWorkMode: 1 });
+        //this.setState({ ModalWorkMode: 1 });
     };
-//workMode = { this.state.workMode }
+
     render() {
 
 
@@ -56,9 +56,21 @@ class CatalogBlock extends React.Component {
           caption = { this.props.caption }
           cbSelected = { this.rowSelected }
 					selectedRow = { this.state.selectedRowCode == v.code }
+          //cbEditItem = {}
+          //deleteItem = {}
+
 					/>
 				);
-				
+				var InfoWindow = <ModalWindow key = { this.state.selectedRowCode }
+            workMode = { this.state.ModalWorkMode }
+            selectedName = { this.state.selectedName }
+            selectedProductURL = { this.state.selectedProductFoto }
+            selectedRowCode = { this.state.selectedRowCode }
+            selectedPrice = { this.state.selectedPrice }
+            selectedResidue = { this.state.selectedResidue }
+            //cbSaveItem = {}
+            //cbCloseWindow = {}
+            />
 
       /* cbSelected = { this.rowSelected }
         selectedRow = { this.state.selectedRowCode == v.code } */
@@ -68,28 +80,28 @@ class CatalogBlock extends React.Component {
 					<table>
 						<thead>
 							<tr>
-								<th> Наименование </th><th> Фото </th><th> Код товара </th><th> Цена, руб </th><th> Остаток на складе </th><th></th><th></th>
+								<th> Наименование </th>
+                <th> Фото </th>
+                <th> Код товара </th>
+                <th> Цена, руб </th>
+                <th> Остаток на складе </th>
+                <th></th>
+                <th></th>
 							</tr>
 						</thead>
 						<tbody>{ catalogCode }
 						</tbody>
 					</table>
-						</div>
-						<div><ModalWindow key = { this.state.selectedRowCode }
-						workMode = { this.state.ModalWorkMode }
-						selectedName = { this.state.selectedName }
-						selectedProductURL = { this.state.selectedProductFoto }
-						selectedRowCode = { this.state.selectedRowCode }
-						selectedPrice = { this.state.selectedPrice }
-						selectedResidue = { this.state.selectedResidue }
-
-						/>
-						</div>
-						<div className = 'NewBtn'>
-							<button> Добавить товар </button>
-						</div>
 					</div>
-        );
+					<div className = 'Info_Window'>
+            {InfoWindow}
+					</div>
+          <br/>
+          <div className = 'NewBtn'>
+            <button> Добавить товар </button>
+          </div>
+				</div>
+      );
 
     }
 }

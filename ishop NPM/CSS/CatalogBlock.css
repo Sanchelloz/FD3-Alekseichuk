@@ -11,22 +11,32 @@
     text-align: center;
 }
 
+.CatalogBlock:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
 .CatalogBlock .Caption {
     font-weight: bold;
     font-size: 40px;
     margin-bottom: 30px;
-    width: 70%;
+    width: 55%;
 }
 
 .CatalogBlock .Catalog {
     margin-left: 20px;
-    width: 100%;
-    display: inline-block;
+    width: 55%;
+    float: left;
+}
+.CatalogBlock .Info_Window {
+    float: right;
+    width: 40%;
 }
 
 .CatalogBlock .Catalog table {
     border-collapse: collapse;
-    width: 70%;
+    width: 100%;
 }
 
 .CatalogBlock .Catalog table tr th{
@@ -48,7 +58,8 @@
 }
 
 #container > div > div.NewBtn{
-  margin: 20px 0 20px 20px;
-  text-align: left;
-    
+    margin: 20px 0 20px 20px;
+    float: left;
+    width: 50%;
+    text-align: left;
 }
