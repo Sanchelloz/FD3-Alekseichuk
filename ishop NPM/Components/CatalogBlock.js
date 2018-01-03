@@ -1,16 +1,17 @@
-﻿import React from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import './../CSS/CatalogBlock.css';
-import ItemBlock from './ItemBlock';
 import ModalWindow from './ModalWindow';
+import ItemBlock from './ItemBlock';
+
 
 
 class CatalogBlock extends React.Component {
 
     static propTypes = {
         caption: PropTypes.string.isRequired,
-        //ModalWorkMode: PropTypes.number.isRequired,
+        ModalWorkMode: PropTypes.number.isRequired,
         selectedRowCode: PropTypes.number,
 				selectedRow: PropTypes.bool,
 				startWorkMode: PropTypes.number.isRequired,
@@ -26,34 +27,27 @@ class CatalogBlock extends React.Component {
     };
 
     state = {
-        selectedRowCode: null,
-				ModalWorkMode: this.props.startWorkMode,
-				selectedName: '',
-				selectedProductFoto: '',
-				selectedCount: null,
-				selectedResidue: null,
-
-				workMode: this.props.startWorkMode,
-					//products: this.props.products,
-					//counter: this.props.defCounter,
-					// errorName: false,
-					// errorCount: false,
-					// errorDescription: false,
-					// errorReminder: false,
-					// disableSave: false
+      selectedRowCode: null,
+			ModalWorkMode: 0,
+			selectedName: '',
+			selectedProductURL: '',
+			selectedCount: null,
+			selectedResidue: null,
+      selectedPrice: null,
+			selectedResidue: null,
 			
     };
 
     rowSelected = (code) => {
         console.log('выбрана строка с кодом ' + code);
         this.setState({ selectedRowCode: code });
+        this.setState({ ModalWorkMode: 1 });
     };
-
+//workMode = { this.state.workMode }
     render() {
 
 
-				var catalogCode = this.props.catalog.map(v =><ItemBlock 
-					key = { v.code }
+				var catalogCode = this.props.catalog.map(v => <ItemBlock key = { v.code }
           name = { v.name }
           URL = { v.URL }
           code = { v.code }
@@ -62,13 +56,12 @@ class CatalogBlock extends React.Component {
           caption = { this.props.caption }
           cbSelected = { this.rowSelected }
 					selectedRow = { this.state.selectedRowCode == v.code }
-					workMode = { this.state.workMode }
-          />
+					/>
 				);
 				
 
-/*<div>{ModalWindow}</div>*/
-
+      /* cbSelected = { this.rowSelected }
+        selectedRow = { this.state.selectedRowCode == v.code } */
         return ( <div className = 'CatalogBlock' >
           <div className = 'Caption' > { this.props.caption } </div>
 					<div className = 'Catalog' >
@@ -82,17 +75,14 @@ class CatalogBlock extends React.Component {
 						</tbody>
 					</table>
 						</div>
-						<div><ModalWindow
-						workMode = { this.state.workMode }
-						key = { this.state.selectedRowCode }
-						name = { this.state.selectedName }
-						URL = { this.state.selectedProductFoto }
-						code = { this.state.code }
-						// price = { v.price }
-						// residue = { v.residue }
-						// caption = { this.props.caption }
-						// cbSelected = { this.rowSelected }
-						// selectedRow = { this.state.selectedRowCode == v.code }
+						<div><ModalWindow key = { this.state.selectedRowCode }
+						workMode = { this.state.ModalWorkMode }
+						selectedName = { this.state.selectedName }
+						selectedProductURL = { this.state.selectedProductFoto }
+						selectedRowCode = { this.state.selectedRowCode }
+						selectedPrice = { this.state.selectedPrice }
+						selectedResidue = { this.state.selectedResidue }
+
 						/>
 						</div>
 						<div className = 'NewBtn'>

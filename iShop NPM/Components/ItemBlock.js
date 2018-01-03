@@ -28,16 +28,13 @@ class ItemBlock extends React.Component {
     render() {
 
         return (
-
           <tr className = {(this.props.selectedRow) ? 'Product SelectedRow' : 'Product'} onClick = { this.rowClicked }>
             <td className = 'Product_name' > { this.props.name } </td>
             <td className = 'Product_foto' ><img src = { this.props.URL }/></td>
             <td className = 'Product_count' > { this.props.code } </td>
             <td className = 'Product_price'> { this.props.price } </td>
             <td className = 'Product_residue'> { this.props.residue } </td>
-            <td className = 'Product_residue'>
             < button > Редактировать </button>
-            </td>
             <td className = 'Product_residue'>
             < button > Удалить </button>
             </td>
