@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import PropTypes from 'prop-types';
 
 import './../CSS/CatalogBlock.css';
@@ -35,8 +35,18 @@ class CatalogBlock extends React.Component {
 			selectedResidue: null,
       selectedPrice: 0,
 			selectedResidue: null,
-			
-    };
+			catalog: this.props.catalog,
+		};
+		
+		editItem = (name, URL, code, price, residue) => {
+			this.setState({ selectedRowCode: code });
+			this.setState({ ModalWorkMode: 2 });
+			this.setState({ selectedName: name });
+			this.setState({ selectedProductURL: URL });
+			this.setState({ selectedCount: code });
+			this.setState({ selectedPrice: price });
+			this.setState({ selectedResidue: residue });
+		};
 
     rowSelected = (name, URL, code, price, residue) => {
         console.log('выбрана строка с кодом ' + code);
@@ -47,7 +57,18 @@ class CatalogBlock extends React.Component {
         this.setState({ selectedCount: code });
         this.setState({ selectedPrice: price });
         this.setState({ selectedResidue: residue });
-    };
+		};
+		deleteRowItem = (CodeDelElem) =>{
+			this.props.catalog.forEach((item, i) => {
+				if (CodeDelElem == this.code) {
+					this.catalog.splice(i, 1)
+				};
+				this.setState({
+					catalog : this.state.catalog.slice(),
+					WorkMode : 0,
+				});
+			});
+		}
 //workMode = { this.state.workMode }
     render() {
 
@@ -61,8 +82,8 @@ class CatalogBlock extends React.Component {
           caption = { this.props.caption }
           cbSelected = { this.rowSelected }
 					selectedRow = { this.state.selectedRowCode == v.code }
-          //cbEditItem = {}
-          //deleteItem = {}
+          cbEditItem = { this.editItem }
+          cbDeletedItem = { this.deleteRowItem }
 
 					/>
 				);

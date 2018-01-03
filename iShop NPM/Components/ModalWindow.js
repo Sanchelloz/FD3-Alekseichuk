@@ -39,25 +39,25 @@ class ModalWindow extends React.Component {
         <label htmlFor='Product_name' className='Divlabel'> Наименование товара: </label>
         <input type='text' className='Product_name' readOnly value = { this.props.selectedName }
         />
-        <span className="ValidText">Данные не верны</span>
+        <span className="ValidText"></span>
         <br/>
 
         <label htmlFor='Product_foto' className='Divlabel'> URL-адрес фото: </label>
         <input type='text' className='Product_foto' readOnly value = { this.props.selectedProductURL }
         />
-        <span className='ValidURL'>Данные не верны</span>
+        <span className='ValidURL'></span>
         <br/>
 
         <label htmlFor='Product_count' className='Divlabel'> Код товара: </label>
         <input type='text' className='Product_count' readOnly value = { this.props.selectedRowCode }
         />
-        <span className='ValidNumber'>Данные не верны</span>
+        <span className='ValidNumber'></span>
         <br/>
 
         <label htmlFor='Product_price' className='Divlabel'> Цена: </label>
         <input type='text' className='Product_price' readOnly value = { this.props.selectedPrice + ' руб'}
         />
-        <span className='ValidNumber'>Данные не верны</span>
+        <span className='ValidNumber'></span>
         <br/>
 
         <label htmlFor='Product_residue' className='Divlabel'> Остаток товара на складе: </label>
