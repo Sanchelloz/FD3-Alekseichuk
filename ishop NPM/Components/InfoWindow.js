@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './../CSS/ModalWindow.css';
+import './../CSS/InfoWindow.css';
 
-class ModalWindow extends React.Component {
+class InfoWindow extends React.Component {
 
   static propTypes = {
     WorkMode: PropTypes.number, //"0" - окно закрыто,
@@ -27,7 +27,7 @@ class ModalWindow extends React.Component {
   };
 
   closeWindow = (EO) => {
-      this.props.cbCloseWindow();
+      this.props.cbCloseWindowInfo();
   };
 
   render() {
@@ -117,4 +117,4 @@ class ModalWindow extends React.Component {
   }
 };
 
-export default ModalWindow;
+export default InfoWindow;

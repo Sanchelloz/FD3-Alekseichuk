@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 
 import './../CSS/CatalogBlock.css';
-import ModalWindow from './ModalWindow';
+import InfoWindow from './InfoWindow';
 import ItemBlock from './ItemBlock';
 
 
@@ -40,38 +40,46 @@ class CatalogBlock extends React.Component {
 		
 		editItem = (name, URL, code, price, residue) => {
 			this.setState({ selectedRowCode: code });
-			this.setState({ ModalWorkMode: 2 });
 			this.setState({ selectedName: name });
 			this.setState({ selectedProductURL: URL });
 			this.setState({ selectedCount: code });
 			this.setState({ selectedPrice: price });
 			this.setState({ selectedResidue: residue });
+      this.setState({ ModalWorkMode: 2 });
+      console.log(this.state.ModalWorkMode + ' - Должно быть 2');
 		};
 
     rowSelected = (name, URL, code, price, residue) => {
         console.log('выбрана строка с кодом ' + code);
         this.setState({ selectedRowCode: code });
-        this.setState({ ModalWorkMode: 1 });
         this.setState({ selectedName: name });
         this.setState({ selectedProductURL: URL });
         this.setState({ selectedCount: code });
         this.setState({ selectedPrice: price });
         this.setState({ selectedResidue: residue });
+        this.setState({ ModalWorkMode: 1 });
+        console.log(this.state.ModalWorkMode);
 		};
 		deleteRowItem = (CodeDelElem) =>{
-			this.props.catalog.forEach((item, i) => {
-				if (CodeDelElem == this.code) {
-					this.catalog.splice(i, 1)
+			this.state.catalog.forEach((item, i) => {
+				if (CodeDelElem == item.code) {
+					this.state.catalog.splice(i, 1)
 				};
+        console.log(this.state.ModalWorkMode);
 				this.setState({
 					catalog : this.state.catalog.slice(),
-					WorkMode : 0,
+					ModalWorkMode : 0,
 				});
 			});
-		}
-//workMode = { this.state.workMode }
-    render() {
+		};
 
+    exitItemInfo = () => {
+        this.setState({ 
+            ModalWorkMode: 0,
+        });
+    };
+
+    render() {
 
 				var catalogCode = this.props.catalog.map(v => <ItemBlock key = { v.code }
           name = { v.name }
@@ -87,7 +95,7 @@ class CatalogBlock extends React.Component {
 
 					/>
 				);
-				var InfoWindow = <ModalWindow key = { this.state.selectedRowCode }
+				var InfoWindowCode = <InfoWindow key = { this.state.selectedRowCode }
             WorkMode = { this.state.ModalWorkMode }
             selectedName = { this.state.selectedName }
             selectedProductURL = { this.state.selectedProductURL }
@@ -95,7 +103,7 @@ class CatalogBlock extends React.Component {
             selectedPrice = { this.state.selectedPrice }
             selectedResidue = { this.state.selectedResidue }
             //cbSaveItem = {}
-            //cbCloseWindow = {}
+            cbCloseWindowInfo = { this.exitItemInfo }
             />
 
 
@@ -119,7 +127,7 @@ class CatalogBlock extends React.Component {
 					</table>
 					</div>
 					<div className = 'Info_Window'>
-            {InfoWindow}
+            {InfoWindowCode}
 					</div>
           <br/>
           <div className = 'NewBtn'>
