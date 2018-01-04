@@ -29,10 +29,13 @@ class ItemBlock extends React.Component {
     editItem = (EO) => {
         this.props.cbEditItem( this.props.name, this.props.URL, this.props.code,
         this.props.price, this.props.residue );
+        EO.stopPropagation();
     };
 
     deleteItem = (EO) => {
         this.props.cbDeletedItem(this.props.code);
+        EO.stopPropagation();
+        console.log('кнопка кликнута');
     };
 
     render() {

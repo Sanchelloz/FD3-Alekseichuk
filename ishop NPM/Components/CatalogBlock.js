@@ -32,43 +32,94 @@ class CatalogBlock extends React.Component {
 			selectedName: '',
 			selectedProductURL: '',
 			selectedCount: null,
-			selectedResidue: null,
-      selectedPrice: 0,
+      selectedPrice: null,
 			selectedResidue: null,
 			catalog: this.props.catalog,
-		};
-		
-		editItem = (name, URL, code, price, residue) => {
-			this.setState({ selectedRowCode: code });
-			this.setState({ selectedName: name });
-			this.setState({ selectedProductURL: URL });
-			this.setState({ selectedCount: code });
-			this.setState({ selectedPrice: price });
-			this.setState({ selectedResidue: residue });
-      this.setState({ ModalWorkMode: 2 });
-      console.log(this.state.ModalWorkMode + ' - Должно быть 2');
+      isEditeItem: false,
 		};
 
     rowSelected = (name, URL, code, price, residue) => {
-        console.log('выбрана строка с кодом ' + code);
-        this.setState({ selectedRowCode: code });
-        this.setState({ selectedName: name });
-        this.setState({ selectedProductURL: URL });
-        this.setState({ selectedCount: code });
-        this.setState({ selectedPrice: price });
-        this.setState({ selectedResidue: residue });
-        this.setState({ ModalWorkMode: 1 });
-        console.log(this.state.ModalWorkMode);
+      this.setState({
+        selectedRowCode: code,
+        selectedName: name,
+        selectedProductURL: URL,
+        selectedCount: code,
+        selectedPrice: price,
+        selectedResidue: residue,
+        ModalWorkMode: 1,
+      });
+    };
+
+		editItem = (name, URL, code, price, residue) => {
+			this.setState({
+        selectedRowCode: code,
+        selectedName: name,
+        selectedProductURL: URL,
+        selectedCount: code,
+        selectedPrice: price,
+        selectedResidue: residue,
+        ModalWorkMode: 2,
+        isEditeItem: true
+      });
 		};
+
+    newItem = () => {
+      this.setState({
+        ModalWorkMode: 2,
+        selectedRowCode: null,
+        selectedName: '',
+        selectedProductURL: '',
+        selectedCount: null,
+        selectedPrice: null,
+        selectedResidue: null,
+        nameError: false,
+        urlError: false,
+        codeError: false,
+        priceError: false,
+        residueError: false,
+        isEditeItem: false,
+      });
+    };
+
+    saveItem = () => {
+        if ((this.state.ModalWorkMode == 2) && this.state.isEditeItem) {
+          this.state.catalog.forEach( item => {
+              if ( this.state.selectedRowCode == item.code ) {
+                item.name = this.state.selectedName;
+                item.URL = this.state.selectedProductURL;
+                item.code = this.state.selectedCount;
+                item.price = this.state.selectedPrice;
+                item.residue = this.state.selectedResidue;                      
+              }
+              
+          })
+        } else {
+            this.state.catalog.push({
+            name : this.state.selectedName,
+            URL : this.state.selectedProductURL,
+            code : this.state.selectedCount,
+            price : this.state.selectedPrice,
+            residue : this.state.selectedResidue,   
+         });
+        };
+        this.setState({ 
+          catalog: this.state.catalog, 
+          ModalWorkMode: 0, 
+        });
+    };
+
 		deleteRowItem = (CodeDelElem) =>{
+      
 			this.state.catalog.forEach((item, i) => {
+        console.dir(this.state.catalog + ' - каталог 1');
 				if (CodeDelElem == item.code) {
 					this.state.catalog.splice(i, 1)
 				};
-        console.log(this.state.ModalWorkMode);
+        console.log(this.state.ModalWorkMode+ ' - deleteRowItem 0');
 				this.setState({
-					catalog : this.state.catalog.slice(),
+					catalog : this.state.catalog,
 					ModalWorkMode : 0,
+          selectedRowCode: null,
 				});
 			});
 		};
@@ -76,12 +127,79 @@ class CatalogBlock extends React.Component {
     exitItemInfo = () => {
         this.setState({ 
             ModalWorkMode: 0,
+            selectedRowCode: null,
         });
     };
 
+    changedFieldName = (newName) => {
+      if (!newName) {
+        this.setState ({ 
+          nameError: true 
+        })
+      } else {
+        this.setState ({ 
+          selectedName: newName, 
+          nameError: false 
+        })
+      };
+    };
+
+    ChangedFieldProductURL = (newURL) => {
+      if (!newURL) {
+        this.setState({ 
+          urlError: true 
+        })
+      } else {
+        this.setState({ 
+          selectedProductURL: newURL, 
+          urlError: false 
+        })
+      };
+    };
+
+    ChangedFieldCode = (newCode) => {
+      if (!newCode) {
+        this.setState({ 
+          codeError: true 
+        })
+      } else {
+        this.setState({ 
+          selectedCount: newCode, 
+          codeError: false 
+        })
+      };
+    };
+
+    ChangedFieldPrice = (newPrice) => {
+      if (!newPrice) {
+        this.setState({ 
+          priceError: true 
+        })
+      } else {
+        this.setState({ 
+          selectedPrice: newPrice, 
+          priceError: false
+        })
+      };
+    };
+
+    ChangedFieldResidue = (newResidue) => {
+      if (!newResidue) {
+        this.setState({ 
+          residueError: true 
+        })
+      } else {
+        this.setState({ 
+          selectedResidue: newResidue, 
+          residueError: false 
+        })
+      };
+    };
+    //enterError = () =>
+
     render() {
 
-				var catalogCode = this.props.catalog.map(v => <ItemBlock key = { v.code }
+				let catalogCode = this.props.catalog.map(v => <ItemBlock key = { v.code }
           name = { v.name }
           URL = { v.URL }
           code = { v.code }
@@ -92,21 +210,23 @@ class CatalogBlock extends React.Component {
 					selectedRow = { this.state.selectedRowCode == v.code }
           cbEditItem = { this.editItem }
           cbDeletedItem = { this.deleteRowItem }
-
 					/>
 				);
-				var InfoWindowCode = <InfoWindow key = { this.state.selectedRowCode }
+				let InfoWindowCode = <InfoWindow key = { this.state.selectedRowCode }
             WorkMode = { this.state.ModalWorkMode }
             selectedName = { this.state.selectedName }
             selectedProductURL = { this.state.selectedProductURL }
             selectedRowCode = { this.state.selectedRowCode }
             selectedPrice = { this.state.selectedPrice }
             selectedResidue = { this.state.selectedResidue }
-            //cbSaveItem = {}
+            cbSaveItem = { this.saveItem }
             cbCloseWindowInfo = { this.exitItemInfo }
+            cbChangeFieldName = { this.changedFieldName }
+            cbChangeFieldProductURL = { this.ChangedFieldProductURL }
+            cbChangeFieldCode = { this.ChangedFieldCode }
+            cbChangeFieldPrice = { this.ChangedFieldPrice }
+            cbChangeFieldResidue = { this.ChangedFieldResidue }
             />
-
-
         return ( <div className = 'CatalogBlock' >
           <div className = 'Caption' > { this.props.caption } </div>
 					<div className = 'Catalog' >
@@ -131,7 +251,7 @@ class CatalogBlock extends React.Component {
 					</div>
           <br/>
           <div className = 'NewBtn'>
-            <button> Добавить товар </button>
+            <button onClick = {this.newItem} > Добавить товар </button>
           </div>
 				</div>
       );

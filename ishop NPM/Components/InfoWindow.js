@@ -9,7 +9,13 @@ class InfoWindow extends React.Component {
     WorkMode: PropTypes.number, //"0" - окно закрыто,
   									//"1" - режим просмотра, "2" - режим редактирования
     cbSaveItem: PropTypes.func.isRequired,
-    cbCloseWindow: PropTypes.func.isRequired,
+    cbCloseWindowInfo: PropTypes.func.isRequired,
+    cbChangeFieldName: PropTypes.func.isRequired,
+    cbChangeFieldProductURL: PropTypes.func.isRequired,
+    cbChangeFieldCode: PropTypes.func.isRequired,
+    cbChangeFieldPrice: PropTypes.func.isRequired,
+    cbChangeFieldResidue: PropTypes.func.isRequired,
+
     catalog: PropTypes.arrayOf(					
       PropTypes.shape({
         selectedName: PropTypes.string.isRequired,
@@ -23,84 +29,103 @@ class InfoWindow extends React.Component {
   };
 
   saveItem = (EO) => {
-      this.props.cbSaveItem();
+    this.props.cbSaveItem();
   };
 
   closeWindow = (EO) => {
-      this.props.cbCloseWindowInfo();
+    this.props.cbCloseWindowInfo();
+  };
+
+  changeFieldName = (EO) => {
+    this.props.cbChangeFieldName(EO.target.value);
+    console.log(EO)
+  };
+
+  changeFieldProductURL = (EO) => {
+    this.props.cbChangeFieldProductURL(EO.target.value);
+    console.log(EO)
+  };
+
+  changeFieldCode = (EO) => {
+    this.props.cbChangeFieldCode(EO.target.value);
+    console.log(EO)
+  };
+
+  changeFieldPrice = (EO) => {
+    this.props.cbChangeFieldPrice(EO.target.value);
+    console.log(EO)
+  };
+
+  changeFieldResidue = (EO) => {
+    this.props.cbChangeFieldResidue(EO.target.value);
+    console.log(EO)
   };
 
   render() {
 
     if ( this.props.WorkMode == 1 ) {
     return (
-      
-    	<form>
-        <label htmlFor='Product_name' className='Divlabel'> Наименование товара: </label>
-        <input type='text' className='Product_name' readOnly value = { this.props.selectedName }
-        />
-        <span className="ValidText"></span>
-        <br/>
+      <div className='WrapInfoWindow'>
+        <div className='WrapDivlabel'>
+          <span className='Divlabel'> Наименование товара: </span>
+          <br/>
+          <span className='Divlabel'> URL-адрес фото: </span>
+          <br/>
+          <span className='Divlabel'> Код товара: </span>
+          <br/>
+          <span className='Divlabel'> Цена, руб: </span>
+          <br/>
+          <span className='Divlabel'> Остаток товара на складе: </span>
+        </div>
 
-        <label htmlFor='Product_foto' className='Divlabel'> URL-адрес фото: </label>
-        <input type='text' className='Product_foto' readOnly value = { this.props.selectedProductURL }
-        />
-        <span className='ValidURL'></span>
-        <br/>
+        <div className='WrapProducts'>
+          <span className='Divlabel'>{ this.props.selectedName }</span>
+          <br/>
+          <span className='Divlabel'>{ this.props.selectedProductURL }</span>
+          <br/>
+          <span className='Divlabel'>{ this.props.selectedRowCode }</span>
+          <br/>
+          <span className='Divlabel'>{ this.props.selectedPrice }</span>
+          <br/>  
+          <span className='Divlabel'>{ this.props.selectedResidue }</span>
+        </div>
 
-        <label htmlFor='Product_count' className='Divlabel'> Код товара: </label>
-        <input type='text' className='Product_count' readOnly value = { this.props.selectedRowCode }
-        />
-        <span className='ValidNumber'></span>
-        <br/>
-
-        <label htmlFor='Product_price' className='Divlabel'> Цена: </label>
-        <input type='text' className='Product_price' readOnly value = { this.props.selectedPrice + ' руб'}
-        />
-        <span className='ValidNumber'></span>
-        <br/>
-
-        <label htmlFor='Product_residue' className='Divlabel'> Остаток товара на складе: </label>
-        <input type='text' className='Product_residue' readOnly value = { this.props.selectedResidue }
-        />
-        <span className='ValidNumber'></span>
         <div className='Block_btn'>
           <input type='submit' value='Отмена' onClick = { this.closeWindow }/>
         </div>
-      </form>
-
+      </div>
       )
 
     }  else if ( this.props.WorkMode == 2 ) {
     return (
       
       <form>
-        <label htmlFor='Product_name' className='Divlabel'> Наименование товара: </label>
-        <input type='text' className='Product_name' placeholder = 'Наименование' defaultValue = { this.props.selectedName }
+        <label htmlFor='Product_name' className='editInfo'> Наименование товара: </label>
+        <input type='text' onChange = {this.changeFieldName} className='Product_name' placeholder = 'Наименование' defaultValue = { this.props.selectedName }
         />
-        <span className="ValidText">Данные не верны</span>
+        <span className="ValidText"></span>
         <br/>
 
-        <label htmlFor='Product_foto' className='Divlabel'> URL-адрес фото: </label>
-        <input type='text' className='Product_foto' placeholder = 'URL ссылка на фото' defaultValue = { this.props.selectedProductURL }
+        <label htmlFor='Product_foto' className='editInfo'> URL-адрес фото: </label>
+        <input type='text' onChange = {this.changeFieldProductURL} className='Product_foto' placeholder = 'URL ссылка на фото' defaultValue = { this.props.selectedProductURL }
         />
-        <span className='ValidURL'>Данные не верны</span>
+        <span className='ValidURL'></span>
         <br/>
 
-        <label htmlFor='Product_count' className='Divlabel'> Код товара: </label>
-        <input type='text' className='Product_count' placeholder = 'Код товара' defaultValue = { this.props.selectedRowCode }
+        <label htmlFor='Product_count' className='editInfo'> Код товара: </label>
+        <input type='number' onChange = {this.changeFieldCode} className='Product_count' placeholder = 'Код товара' defaultValue = { this.props.selectedRowCode }
         />
-        <span className='ValidNumber'>Данные не верны</span>
+        <span className='ValidNumber'></span>
         <br/>
 
-        <label htmlFor='Product_price' className='Divlabel'> Цена: </label>
-        <input type='text' className='Product_price' placeholder = 'Цена' defaultValue = { this.props.selectedPrice + ' руб'}
+        <label htmlFor='Product_price' className='editInfo'> Цена, руб: </label>
+        <input type='number' onChange = {this.changeFieldPrice} className='Product_price' placeholder = 'Цена' defaultValue = { this.props.selectedPrice }
         />
-        <span className='ValidNumber'>Данные не верны</span>
+        <span className='ValidNumber'></span>
         <br/>
 
-        <label htmlFor='Product_residue' className='Divlabel'> Остаток товара на складе: </label>
-        <input type='text' className='Product_residue' readOnly placeholder = 'Остаток' value = { this.props.selectedResidue }
+        <label htmlFor='Product_residue' className='editInfo'> Остаток товара на складе: </label>
+        <input type='number' onChange = {this.changeFieldResidue} className='Product_residue' placeholder = 'Остаток' defaultValue = { this.props.selectedResidue }
         />
         <span className='ValidNumber'></span>
         <br/>

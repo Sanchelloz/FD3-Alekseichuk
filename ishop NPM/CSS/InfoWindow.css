@@ -1,5 +1,7 @@
+
+
 .Divlabel{
-	width: 25%;
+	width: 100%;
 	display: inline-block;
 	text-align: left;
 	margin-bottom: 10px;
@@ -8,7 +10,7 @@
 
 .Product_name, .Product_foto, .Product_count,
 .Product_price, .Product_residue{
-	width: 50%;;
+	width: 50%;
 }
 
 .Block_btn{
@@ -24,4 +26,24 @@
 	display: inline-block;
 	width: 24%;
 	/*display: none;*/
+}
+
+.WrapInfoWindow{
+	font-weight: bold;
+
+}
+.WrapDivlabel{
+	display: inline-block;
+	width: 30%;
+}
+.WrapProducts{
+	display: inline-block;
+	width: 69%;
+}
+
+.editInfo{
+	width: 25%;
+	display: inline-block;
+	text-align: left;
+	margin-bottom: 10px;
 }
