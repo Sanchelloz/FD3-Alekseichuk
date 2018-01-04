@@ -35,7 +35,6 @@ class ItemBlock extends React.Component {
     deleteItem = (EO) => {
         this.props.cbDeletedItem(this.props.code);
         EO.stopPropagation();
-        console.log('кнопка кликнута');
     };
 
     render() {

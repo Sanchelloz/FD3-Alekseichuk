@@ -15,6 +15,12 @@ class InfoWindow extends React.Component {
     cbChangeFieldCode: PropTypes.func.isRequired,
     cbChangeFieldPrice: PropTypes.func.isRequired,
     cbChangeFieldResidue: PropTypes.func.isRequired,
+    mistakeName: PropTypes.bool, 
+    mistakeURL: PropTypes.bool, 
+    mistakeCode: PropTypes.bool, 
+    mistakePrice: PropTypes.bool, 
+    mistakeResidue: PropTypes.bool,
+    isSaveBtnActive: PropTypes.bool,
 
     catalog: PropTypes.arrayOf(					
       PropTypes.shape({
@@ -23,7 +29,6 @@ class InfoWindow extends React.Component {
         selectedRowCode: PropTypes.number.isRequired,
         selectedPrice: PropTypes.number.isRequired,
         selectedResidue: PropTypes.number.isRequired,
-        
       })
     ),
   };
@@ -38,30 +43,27 @@ class InfoWindow extends React.Component {
 
   changeFieldName = (EO) => {
     this.props.cbChangeFieldName(EO.target.value);
-    console.log(EO)
+    //console.log(EO)
   };
 
   changeFieldProductURL = (EO) => {
     this.props.cbChangeFieldProductURL(EO.target.value);
-    console.log(EO)
   };
 
   changeFieldCode = (EO) => {
     this.props.cbChangeFieldCode(EO.target.value);
-    console.log(EO)
   };
 
   changeFieldPrice = (EO) => {
     this.props.cbChangeFieldPrice(EO.target.value);
-    console.log(EO)
   };
 
   changeFieldResidue = (EO) => {
     this.props.cbChangeFieldResidue(EO.target.value);
-    console.log(EO)
   };
 
   render() {
+    let mistakeText = 'Вы не вели данные'
 
     if ( this.props.WorkMode == 1 ) {
     return (
@@ -101,36 +103,32 @@ class InfoWindow extends React.Component {
       
       <form>
         <label htmlFor='Product_name' className='editInfo'> Наименование товара: </label>
-        <input type='text' onChange = {this.changeFieldName} className='Product_name' placeholder = 'Наименование' defaultValue = { this.props.selectedName }
-        />
-        <span className="ValidText"></span>
+        <input type='text' className={ ( this.props.mistakeName ) ? 'ValidText' : 'Product_input'} onChange = {this.changeFieldName}
+         placeholder = { ( this.props.mistakeName ) ? 'Вы не ввели данные' : 'Наименование'} defaultValue = { this.props.selectedName } />
         <br/>
 
         <label htmlFor='Product_foto' className='editInfo'> URL-адрес фото: </label>
-        <input type='text' onChange = {this.changeFieldProductURL} className='Product_foto' placeholder = 'URL ссылка на фото' defaultValue = { this.props.selectedProductURL }
-        />
-        <span className='ValidURL'></span>
+        <input type='text' className={ ( this.props.mistakeURL ) ? 'ValidText' : 'Product_input'} onChange = {this.changeFieldProductURL}
+         placeholder = { ( this.props.mistakeURL ) ? 'Вы не ввели данные' : 'URL ссылка на фото'} defaultValue = { this.props.selectedProductURL } />
         <br/>
 
         <label htmlFor='Product_count' className='editInfo'> Код товара: </label>
-        <input type='number' onChange = {this.changeFieldCode} className='Product_count' placeholder = 'Код товара' defaultValue = { this.props.selectedRowCode }
-        />
-        <span className='ValidNumber'></span>
+        <input type='number' className={ ( this.props.mistakeCode ) ? 'ValidText' : 'Product_input'} onChange = {this.changeFieldCode}
+         placeholder = { ( this.props.mistakeCode ) ? 'Вы не ввели данные' : 'Код товара'} defaultValue = { this.props.selectedRowCode } />
+
         <br/>
 
         <label htmlFor='Product_price' className='editInfo'> Цена, руб: </label>
-        <input type='number' onChange = {this.changeFieldPrice} className='Product_price' placeholder = 'Цена' defaultValue = { this.props.selectedPrice }
-        />
-        <span className='ValidNumber'></span>
+        <input type='number' className={ ( this.props.mistakePrice ) ? 'ValidText' : 'Product_input'} onChange = {this.changeFieldPrice}
+         placeholder = { ( this.props.mistakePrice ) ? 'Вы не ввели данные' : 'Цена'} defaultValue = { this.props.selectedPrice } />
         <br/>
 
         <label htmlFor='Product_residue' className='editInfo'> Остаток товара на складе: </label>
-        <input type='number' onChange = {this.changeFieldResidue} className='Product_residue' placeholder = 'Остаток' defaultValue = { this.props.selectedResidue }
-        />
-        <span className='ValidNumber'></span>
+        <input type='number' className={ ( this.props.mistakeResidue ) ? 'ValidText' : 'Product_input'} onChange = {this.changeFieldResidue}
+         placeholder = { ( this.props.mistakeResidue ) ? 'Вы не ввели данные' : 'Остаток'} defaultValue = { this.props.selectedResidue } />
         <br/>
         <div className='Block_btn'>
-          <input type='submit' value='Сохранить' onClick = { this.saveItem }/>
+          <input type='submit' value='Сохранить' disabled = { this.props.isSaveBtnActive } onClick = { this.saveItem }/>
           <input type='submit' value='Отмена' onClick = { this.closeWindow }/>
         </div>
       </form>

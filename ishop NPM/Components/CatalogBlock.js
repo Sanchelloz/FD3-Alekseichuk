@@ -36,6 +36,12 @@ class CatalogBlock extends React.Component {
 			selectedResidue: null,
 			catalog: this.props.catalog,
       isEditeItem: false,
+      mistakeName: false,
+      mistakeURL: false,
+      mistakeCode: false,
+      mistakePrice: false,
+      mistakeResidue: false,
+      isSaveBtnActive: false,
 		};
 
     rowSelected = (name, URL, code, price, residue) => {
@@ -59,7 +65,7 @@ class CatalogBlock extends React.Component {
         selectedPrice: price,
         selectedResidue: residue,
         ModalWorkMode: 2,
-        isEditeItem: true
+        isEditeItem: true,
       });
 		};
 
@@ -72,12 +78,13 @@ class CatalogBlock extends React.Component {
         selectedCount: null,
         selectedPrice: null,
         selectedResidue: null,
-        nameError: false,
-        urlError: false,
-        codeError: false,
-        priceError: false,
-        residueError: false,
+        // mistakeName: true,
+        // mistakeURL: true,
+        // mistakeCode: true,
+        // mistakePrice: true,
+        // mistakeResidue: true,
         isEditeItem: false,
+        isSaveBtnActive: true,
       });
     };
 
@@ -111,11 +118,11 @@ class CatalogBlock extends React.Component {
 		deleteRowItem = (CodeDelElem) =>{
       
 			this.state.catalog.forEach((item, i) => {
-        console.dir(this.state.catalog + ' - каталог 1');
+        // console.dir(this.state.catalog + ' - каталог 1');
 				if (CodeDelElem == item.code) {
 					this.state.catalog.splice(i, 1)
 				};
-        console.log(this.state.ModalWorkMode+ ' - deleteRowItem 0');
+        // console.log(this.state.ModalWorkMode+ ' - deleteRowItem 0');
 				this.setState({
 					catalog : this.state.catalog,
 					ModalWorkMode : 0,
@@ -134,68 +141,73 @@ class CatalogBlock extends React.Component {
     changedFieldName = (newName) => {
       if (!newName) {
         this.setState ({ 
-          nameError: true 
-        })
+          mistakeName: true 
+        }, this.isSaveBtnActive)
       } else {
         this.setState ({ 
           selectedName: newName, 
-          nameError: false 
-        })
+          mistakeName: false 
+        }, this.isSaveBtnActive)
       };
     };
 
     ChangedFieldProductURL = (newURL) => {
       if (!newURL) {
         this.setState({ 
-          urlError: true 
-        })
+          mistakeURL: true 
+        }, this.isSaveBtnActive)
       } else {
         this.setState({ 
           selectedProductURL: newURL, 
-          urlError: false 
-        })
+          mistakeURL: false 
+        }, this.isSaveBtnActive)
       };
     };
 
     ChangedFieldCode = (newCode) => {
       if (!newCode) {
         this.setState({ 
-          codeError: true 
-        })
+          mistakeCode: true 
+        }, this.isSaveBtnActive)
       } else {
         this.setState({ 
           selectedCount: newCode, 
-          codeError: false 
-        })
+          mistakeCode: false 
+        }, this.isSaveBtnActive)
       };
     };
 
     ChangedFieldPrice = (newPrice) => {
       if (!newPrice) {
         this.setState({ 
-          priceError: true 
-        })
+          mistakePrice: true 
+        }, this.isSaveBtnActive)
       } else {
         this.setState({ 
           selectedPrice: newPrice, 
-          priceError: false
-        })
+          mistakePrice: false
+        }, this.isSaveBtnActive)
       };
     };
 
     ChangedFieldResidue = (newResidue) => {
       if (!newResidue) {
         this.setState({ 
-          residueError: true 
-        })
+          mistakeResidue: true 
+        }, this.isSaveBtnActive)
       } else {
         this.setState({ 
           selectedResidue: newResidue, 
-          residueError: false 
-        })
+          mistakeResidue: false 
+        }, this.isSaveBtnActive)
       };
     };
-    //enterError = () =>
+
+    isSaveBtnActive = () => {
+      if (this.state.mistakeName || this.state.mistakeURL || this.state.mistakeCode || this.state.mistakePrice || this.state.mistakeResidue) {
+          this.setState({ isSaveBtnActive: true });
+      } else {this.setState({ isSaveBtnActive: false })};
+    ;}
 
     render() {
 
@@ -211,7 +223,8 @@ class CatalogBlock extends React.Component {
           cbEditItem = { this.editItem }
           cbDeletedItem = { this.deleteRowItem }
 					/>
-				);
+        );
+        
 				let InfoWindowCode = <InfoWindow key = { this.state.selectedRowCode }
             WorkMode = { this.state.ModalWorkMode }
             selectedName = { this.state.selectedName }
@@ -226,6 +239,12 @@ class CatalogBlock extends React.Component {
             cbChangeFieldCode = { this.ChangedFieldCode }
             cbChangeFieldPrice = { this.ChangedFieldPrice }
             cbChangeFieldResidue = { this.ChangedFieldResidue }
+            mistakeName = { this.state.mistakeName }
+            mistakeURL = { this.state.mistakeURL }
+            mistakeCode = { this.state.mistakeCode }
+            mistakePrice = { this.state.mistakePrice }
+            mistakeResidue = { this.state.mistakeResidue }
+            isSaveBtnActive = { this.state.isSaveBtnActive }
             />
         return ( <div className = 'CatalogBlock' >
           <div className = 'Caption' > { this.props.caption } </div>

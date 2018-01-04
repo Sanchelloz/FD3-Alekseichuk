@@ -8,8 +8,7 @@
 
 }
 
-.Product_name, .Product_foto, .Product_count,
-.Product_price, .Product_residue{
+.Product_input{
 	width: 50%;
 }
 
@@ -46,4 +45,10 @@
 	display: inline-block;
 	text-align: left;
 	margin-bottom: 10px;
+}
+
+.ValidText{
+	color: red;
+	border: 2px solid red;
+	width: 50%;
 }
