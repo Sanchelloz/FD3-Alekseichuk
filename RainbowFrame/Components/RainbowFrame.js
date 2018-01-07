@@ -10,11 +10,13 @@ class RainbowFrame extends React.Component {
   };
 
   render() {
-  	let colors = this.props.colorsArr
+  	let colorsArr = this.props.colorsArr;
 
-  	for (let i=0; i<colors.length; i++){
-  		<div className = {'border_frame border_' + ( colors[i] )}></div>
-  	}
+  	for (let i=0; i<colorsArr.length; i++){
+  		<div className = {'border_frame border_' + ( colorsArr[i] )}>{this.props.children}</div>
+  	};
+
+	return this.props.children
 
   }
 }

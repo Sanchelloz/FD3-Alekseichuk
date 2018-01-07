@@ -10,8 +10,8 @@ let colorsArr = require("./Colors.json");
 const TEXT = 'RainbowFrame';
 
 ReactDOM.render(
-	<RainbowFrame
-		text = { TEXT }
-    colorsArr = { colorsArr }
-    />, document.getElementById('container')
+	<RainbowFrame colorsArr = {colorsArr}>
+
+		{ TEXT }
+  </RainbowFrame> , document.getElementById('container')
 );
