@@ -11,7 +11,6 @@ const TEXT = 'RainbowFrame';
 
 ReactDOM.render(
 	<RainbowFrame colorsArr = {colorsArr}>
-
 		{ TEXT }
   </RainbowFrame> , document.getElementById('container')
 );
