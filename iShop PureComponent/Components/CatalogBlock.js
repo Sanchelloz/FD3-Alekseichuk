@@ -7,7 +7,7 @@ import ItemBlock from './ItemBlock';
 
 
 
-class CatalogBlock extends React.Component {
+class CatalogBlock extends React.PureComponent {
 
     static propTypes = {
         caption: PropTypes.string.isRequired,
@@ -54,6 +54,7 @@ class CatalogBlock extends React.Component {
         selectedResidue: residue,
         ModalWorkMode: 1,
       });
+      this.state.catalog.slice();
     };
 
 		editItem = (name, URL, code, price, residue) => {
@@ -68,7 +69,6 @@ class CatalogBlock extends React.Component {
         isEditeItem: true,
       });
       this.state.catalog.slice();
-
 		};
 
     newItem = () => {
@@ -84,7 +84,6 @@ class CatalogBlock extends React.Component {
         isSaveBtnActive: true,
       });
       this.state.catalog.slice();
-
     };
 
     saveItem = () => {
@@ -109,7 +108,7 @@ class CatalogBlock extends React.Component {
          });
         };
         this.setState({ 
-          catalog: this.state.catalog, 
+          catalog: this.state.catalog.slice(), 
           ModalWorkMode: 0, 
         });
     };
@@ -123,9 +122,9 @@ class CatalogBlock extends React.Component {
 				};
         // console.log(this.state.ModalWorkMode+ ' - deleteRowItem 0');
 				this.setState({
-					catalog : this.state.catalog,
+					catalog : this.state.catalog.slice(),
 					ModalWorkMode : 0,
-          
+          selectedRowCode: null,
 				});
 			});
 		};
@@ -133,7 +132,7 @@ class CatalogBlock extends React.Component {
     exitItemInfo = () => {
         this.setState({ 
             ModalWorkMode: 0,
-            
+            selectedRowCode: null,
         });
     };
 
@@ -146,9 +145,11 @@ class CatalogBlock extends React.Component {
         this.setState ({ 
           selectedName: newName, 
           mistakeName: false,
-          
+
         }, this.isSaveBtnActive)
+        this.state.catalog.slice()
       };
+
     };
 
     ChangedFieldProductURL = (newURL) => {
@@ -159,8 +160,7 @@ class CatalogBlock extends React.Component {
       } else {
         this.setState({ 
           selectedProductURL: newURL, 
-          mistakeURL: false,
-          selectedRowCode: null,
+          mistakeURL: false 
         }, this.isSaveBtnActive)
       };
     };
@@ -211,7 +211,7 @@ class CatalogBlock extends React.Component {
     ;}
 
     render() {
-
+        console.log("catalog render");
 				let catalogCode = this.props.catalog.map(v => <ItemBlock key = { v.code }
           name = { v.name }
           URL = { v.URL }

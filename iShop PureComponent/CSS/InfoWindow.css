@@ -1,0 +1,54 @@
+
+
+.Divlabel{
+	width: 100%;
+	display: inline-block;
+	text-align: left;
+	margin-bottom: 10px;
+
+}
+
+.Product_input{
+	width: 50%;
+}
+
+.Block_btn{
+	text-align: center;
+	margin-top: 15px;
+}
+
+.Block_btn input{
+	
+	margin-right: 15px;
+}
+.ValidText, .ValidURL, .ValidNumber{
+	display: inline-block;
+	width: 24%;
+	/*display: none;*/
+}
+
+.WrapInfoWindow{
+	font-weight: bold;
+
+}
+.WrapDivlabel{
+	display: inline-block;
+	width: 30%;
+}
+.WrapProducts{
+	display: inline-block;
+	width: 69%;
+}
+
+.editInfo{
+	width: 25%;
+	display: inline-block;
+	text-align: left;
+	margin-bottom: 10px;
+}
+
+.ValidText{
+	color: red;
+	border: 2px solid red;
+	width: 50%;
+}
