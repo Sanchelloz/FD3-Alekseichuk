@@ -1,55 +1,103 @@
-var Car = /** @class */ (function () {
-    function Car(_numb) {
-        this.speed = 0;
-        this.numb = _numb;
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var Products = /** @class */ (function () {
+    function Products(_name, _weight) {
+        this.name = _name;
+        this.weight = _weight;
     }
-    Car.prototype.start = function (_speed) {
-        this.speed = _speed;
+    ;
+    Products.prototype.getName = function () {
+        return this.name;
     };
-    Car.prototype.stop = function () {
-        this.speed = 0;
+    ;
+    Products.prototype.getWeight = function () {
+        return this.weight;
     };
-    Car.prototype.beep = function () {
-        console.log("car " + this.numb + " beeep!");
-    };
-    return Car;
+    ;
+    return Products;
 }());
-var Ship = /** @class */ (function () {
-    function Ship() {
-        this.speed = 0;
-        this.sailState = false;
+;
+var Scales = /** @class */ (function () {
+    function Scales() {
+        this.listAddedProducts = [];
     }
-    Ship.prototype.setSail = function (_state) {
-        this.sailState = _state;
+    ;
+    Scales.prototype.add = function (currentProduct) {
+        this.listAddedProducts.push(currentProduct);
     };
-    Ship.prototype.start = function (_speed) {
-        this.speed = _speed;
-        this.setSail(true);
+    ;
+    Scales.prototype.remove = function (currentProduct) {
+        var i = this.listAddedProducts.indexOf(currentProduct);
+        this.listAddedProducts.splice(i, 1);
     };
-    Ship.prototype.stop = function () {
-        this.speed = 0;
-        this.setSail(false);
+    ;
+    Scales.prototype.getSumWeight = function () {
+        var sumWeight = 0;
+        for (var _i = 0, _a = this.listAddedProducts; _i < _a.length; _i++) {
+            var currentProduct = _a[_i];
+            sumWeight += currentProduct.getWeight();
+        }
+        ;
+        return sumWeight;
     };
-    Ship.prototype.showShip = function () {
-        console.log("ship sailState=" + this.sailState
-            + " speed=" + this.speed);
+    ;
+    Scales.prototype.getNameList = function () {
+        var namesList = [];
+        for (var _i = 0, _a = this.listAddedProducts; _i < _a.length; _i++) {
+            var currentProduct = _a[_i];
+            namesList.push(currentProduct.getName());
+        }
+        ;
+        return namesList;
     };
-    return Ship;
+    ;
+    return Scales;
 }());
-function trainer(trainee) {
-    for (var test = 0; test < 10; test++) {
-        if (trainee instanceof Car) {
-            // внутри этого if считается, что trainee - Car
-            trainee.beep();
-        }
-        if (trainee instanceof Ship) {
-            // внутри этого if считается, что trainee - Ship
-            trainee.showShip();
-        }
+;
+var Apple = /** @class */ (function (_super) {
+    __extends(Apple, _super);
+    function Apple(name, weight) {
+        return _super.call(this, name, weight) || this;
     }
-}
-var car1 = new Car("2870-ОГО");
-trainer(car1);
-var ship1 = new Ship();
-trainer(ship1);
+    return Apple;
+}(Products));
+;
+var Tomato = /** @class */ (function (_super) {
+    __extends(Tomato, _super);
+    function Tomato(name, weight) {
+        return _super.call(this, name, weight) || this;
+    }
+    return Tomato;
+}(Products));
+;
+var Cucumber = /** @class */ (function (_super) {
+    __extends(Cucumber, _super);
+    function Cucumber(name, weight) {
+        return _super.call(this, name, weight) || this;
+    }
+    return Cucumber;
+}(Products));
+;
+var scales = new Scales();
+var apple = new Apple("яблоки", 1000);
+var tomato = new Tomato("помидоры", 1500);
+var cucumber = new Cucumber("огурцы", 2500);
+scales.add(apple);
+scales.add(tomato);
+console.log(scales.getNameList());
+console.log(scales.getSumWeight());
+scales.add(cucumber);
+console.log(scales.getNameList());
+console.log(scales.getSumWeight());
+scales.remove(apple);
+console.log(scales.getNameList());
+console.log(scales.getSumWeight());
 //# sourceMappingURL=app.js.map

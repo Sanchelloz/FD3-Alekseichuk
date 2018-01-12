@@ -1,144 +1,105 @@
 
+class Products {
+		
+	name:string;
+	weight:number;
+
+	constructor(currentName:string,currentWeight:number) {
+		this.name=currentName; 
+		this.weight=currentWeight;
+	};
+
+	getName():string {
+			return this.name;
+	};
+
+	getWeight ():number {
+		return this.weight;
+	};
+ 
+};
+
 class Scales {
 
-    name:string;
-    weight:number;
-    listAddProducts:Array<string>;
-    baseProducts:{name:string, weight:number};
-    sumScale:number;
-    
-    constructor(_name:string,_weight:number) {
-        this.weight=0;
-        this.sumScale=0;
-        this.name=_name;
-        this.weight=_weight;
-    }
+		listAddedProducts:Array<Products>=[];
 
-    add(_name:string,_weight:number):void {
-        this.baseProducts={name:_name, weight:_weight}
-        
-    };
+		constructor() {    };
 
-    getSumScale(_baseProducts:{name:string, weight:number}):number {
-			this.baseProducts=_baseProducts;
-      for (var key in this.baseProducts) {
-        this.sumScale += this.baseProducts[key]
+		add(currentProduct:Products):void {
+				
+				this.listAddedProducts.push(currentProduct);
+
+		};
+
+		remove(currentProduct:Products):void {
+			
+			 let i = this.listAddedProducts.indexOf(currentProduct);
+			 this.listAddedProducts.splice(i,1);
+			
+		};
+
+		getSumWeight():number {
+			let sumWeight:number=0;
+
+			for (let currentProduct of this.listAddedProducts) {
+				sumWeight += currentProduct.getWeight();
 			};
 				
-        return this.sumScale;
-    };
-    
-    getNameList(_baseProducts:{name:string, weight:number}):string[] {
+			return sumWeight;
+		};
+		
+		getNameList():string[] {
+			let namesList:Array<string>=[];
 
-			this.listAddProducts = Object.keys(_baseProducts);
-      return this.listAddProducts;
-    };
+			for (let currentProduct of this.listAddedProducts) {
+				namesList.push(currentProduct.getName());
+			};
+			return namesList;
+		};
 
-}
+};
 
-class Product {
-    
-	speed:number;
-	sailState:boolean;
-
-	constructor() {
-			this.speed=0; 
-			this.sailState=false;
+class Apple extends Products {
+	constructor(name:string,weight:number) {
+		super(name, weight);
 	}
+};
 
-	setSail(_state:boolean):void {
-			this.sailState=_state;
+class Tomato extends Products {
+	constructor(name:string,weight:number) {
+		super(name, weight);
 	}
+};
 
-	start(_speed:number):void {
-			this.speed=_speed;
-			this.setSail(true);
+class Cucumber extends Products {
+	constructor(name:string,weight:number) {
+		super(name, weight);
 	}
+};
 
-	stop():void {
-			this.speed=0;
-			this.setSail(false);
-	}    
+let scales = new Scales();
 
-	showShip():void {
-			console.log("ship sailState="+this.sailState
-				+" speed="+this.speed);
-	}
-}
+let apple = new Apple("яблоки", 1000);
+
+let tomato = new Tomato("помидоры", 1500);
+
+let cucumber = new Cucumber("огурцы", 2500);
 
 
+scales.add(apple);
+scales.add(tomato);
+
+console.log(scales.getNameList());
+console.log(scales.getSumWeight());
+
+scales.add(cucumber);
 
 
-class Car {
+console.log(scales.getNameList());
+console.log(scales.getSumWeight());
 
-    numb:string;
-    speed:number;
-    
-    constructor(_numb:string) {
-        this.speed=0; 
-        this.numb=_numb;
-    }
+scales.remove(apple);
 
-    start(_speed:number):void {
-        this.speed=_speed;
-    }
 
-    stop():void {
-        this.speed=0;
-    }
-    
-    beep():void {
-        console.log("car "+this.numb+" beeep!");
-    }
-
-}
-
-class Ship {
-    
-    speed:number;
-    sailState:boolean;
-
-    constructor() {
-        this.speed=0; 
-        this.sailState=false;
-    }
-
-    setSail(_state:boolean):void {
-        this.sailState=_state;
-    }
-
-    start(_speed:number):void {
-        this.speed=_speed;
-        this.setSail(true);
-    }
-
-    stop():void {
-        this.speed=0;
-        this.setSail(false);
-    }    
-
-    showShip():void {
-        console.log("ship sailState="+this.sailState
-          +" speed="+this.speed);
-    }
-}
-
-    
-function trainer(trainee:Car|Ship):void {
-    for ( let test=0; test<10; test++ ) {
-        if ( trainee instanceof Car ) {
-            // внутри этого if считается, что trainee - Car
-            trainee.beep();
-        }
-        if ( trainee instanceof Ship ) {
-            // внутри этого if считается, что trainee - Ship
-            trainee.showShip();
-        }
-    }
-}
-
-let car1:Car=new Car("2870-ОГО");
-trainer(car1);
-
-let ship1:Ship=new Ship();
-trainer(ship1);
+console.log(scales.getNameList());
+console.log(scales.getSumWeight());
