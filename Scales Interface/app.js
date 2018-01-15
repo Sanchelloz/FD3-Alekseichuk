@@ -1,30 +1,51 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var Products = /** @class */ (function () {
-    function Products(currentName, currentWeight) {
+var Apple = /** @class */ (function () {
+    function Apple(currentName, currentWeight) {
         this.name = currentName;
         this.weight = currentWeight;
     }
     ;
-    Products.prototype.getName = function () {
+    Apple.prototype.getName = function () {
         return this.name;
     };
     ;
-    Products.prototype.getWeight = function () {
+    Apple.prototype.getWeight = function () {
         return this.weight;
     };
     ;
-    return Products;
+    return Apple;
 }());
-;
+var Tomato = /** @class */ (function () {
+    function Tomato(currentName, currentWeight) {
+        this.name = currentName;
+        this.weight = currentWeight;
+    }
+    ;
+    Tomato.prototype.getName = function () {
+        return this.name;
+    };
+    ;
+    Tomato.prototype.getWeight = function () {
+        return this.weight;
+    };
+    ;
+    return Tomato;
+}());
+var Cucumber = /** @class */ (function () {
+    function Cucumber(currentName, currentWeight) {
+        this.name = currentName;
+        this.weight = currentWeight;
+    }
+    ;
+    Cucumber.prototype.getName = function () {
+        return this.name;
+    };
+    ;
+    Cucumber.prototype.getWeight = function () {
+        return this.weight;
+    };
+    ;
+    return Cucumber;
+}());
 var Scales = /** @class */ (function () {
     function Scales() {
         this.listAddedProducts = [];
@@ -61,30 +82,6 @@ var Scales = /** @class */ (function () {
     ;
     return Scales;
 }());
-;
-var Apple = /** @class */ (function (_super) {
-    __extends(Apple, _super);
-    function Apple(name, weight) {
-        return _super.call(this, name, weight) || this;
-    }
-    return Apple;
-}(Products));
-;
-var Tomato = /** @class */ (function (_super) {
-    __extends(Tomato, _super);
-    function Tomato(name, weight) {
-        return _super.call(this, name, weight) || this;
-    }
-    return Tomato;
-}(Products));
-;
-var Cucumber = /** @class */ (function (_super) {
-    __extends(Cucumber, _super);
-    function Cucumber(name, weight) {
-        return _super.call(this, name, weight) || this;
-    }
-    return Cucumber;
-}(Products));
 ;
 var scales = new Scales();
 var apple = new Apple("яблоки", 1000);
