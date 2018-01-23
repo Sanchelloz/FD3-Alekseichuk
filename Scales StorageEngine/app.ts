@@ -34,9 +34,7 @@ class ScalesStorageEngineArray implements IStorageEngine {
 	
 	items: Array<Products>=[];;
 	
-	constructor() {
-    //this.items=[];
-  };
+	constructor() {};
 
   addItem(item:Products):void{
   	this.items.push(item);
@@ -53,7 +51,7 @@ class ScalesStorageEngineArray implements IStorageEngine {
   };
 
   getCount():number{
-  	return this.items.length-1
+  	return this.items.length
 	};
 
   getSumWeight():number {
@@ -75,30 +73,52 @@ class ScalesStorageEngineArray implements IStorageEngine {
 
 	  return namesList;
   };
-}
-
-
-
-class Scales {
-
-		//listAddedProducts:Array<Products>=[];
-		constructor() {    };
-		// add(currentProduct:Products):void {
-		// 		this.listAddedProducts.push(currentProduct);
-		// };
-		// remove(currentProduct:Products):void {
-			
-		// 	let i = this.items.indexOf(currentProduct);
-		// 	this.items.splice(i,1);
-		// };
 };
 
 
+// параметризованная фабрика
+// умеет создавать и возвращать объекты любых типов
+/*function uniFactory<objtype>(classRef: { new (): objtype; }): objtype {
+
+   return new classRef();
+
+};*/
+//	описывайте класс "весы", который шаблонизован StorageEngine и создавайте весы, указывая как тИповый аргумент ScalesStorageEngineArray 
+//	объект типа StorageEngine можно как создавать внутри класса Scale, так и передавать снаружи заранее созданный; 
+//	советую второй вариант
+//	ну и весы, когда хотят суммарный вес продуктов, обращаются именно к объекту типа StorageEngine
+/*	так, окей, в классе Scales нужно описать переменную типа StorageEngine и присвоить ей в
+ 		конструкторе объект этого класса для создания объекта да, надо использовать эту фабрику*/
+
+//let newStorageEngine:Products = uniFactory<Products>;
 
 
+class Scales<StorageEngine extends IStorageEngine> {
+
+		storageEngine:StorageEngine;
+
+		constructor(_storageEngine) {
+			this.storageEngine = _storageEngine;
+		};
+
+	getSumWeight():number {
+		 
+	  return this.storageEngine.getSumWeight();
+  };
+ 
+  getNameList():string[] {
+
+	  return this.storageEngine.getNameList();
+  };
 
 
-let scales = new Scales();
+};
+
+
+let scales = new Scales(ScalesStorageEngineArray);
+
+//let newScales<StorageEngine> = uniFactory<StorageEngine>(StorageEngine);
+
 
 // let apple = new Apple("яблоки", 1000);
 
