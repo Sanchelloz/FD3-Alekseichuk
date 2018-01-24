@@ -87,19 +87,20 @@ class ScalesStorageEngineArray implements IStorageEngine {
 //	объект типа StorageEngine можно как создавать внутри класса Scale, так и передавать снаружи заранее созданный; 
 //	советую второй вариант
 //	ну и весы, когда хотят суммарный вес продуктов, обращаются именно к объекту типа StorageEngine
-/*	так, окей, в классе Scales нужно описать переменную типа StorageEngine и присвоить ей в
- 		конструкторе объект этого класса для создания объекта да, надо использовать эту фабрику*/
+
 
 //let newStorageEngine:Products = uniFactory<Products>;
 
-
+/*	так, окей, в классе Scales нужно описать переменную типа StorageEngine и присвоить ей в
+ 		конструкторе объект этого класса для создания объекта да, надо использовать эту фабрику*/
+ 		
 class Scales<StorageEngine extends IStorageEngine> {
 
-		storageEngine:StorageEngine;
+	storageEngine:StorageEngine;
 
-		constructor(_storageEngine) {
-			this.storageEngine = _storageEngine;
-		};
+	constructor(_storageEngine) {
+		this.storageEngine = _storageEngine;
+	};
 
 	getSumWeight():number {
 		 
@@ -114,33 +115,28 @@ class Scales<StorageEngine extends IStorageEngine> {
 
 };
 
+let newStorageEA: ScalesStorageEngineArray = new ScalesStorageEngineArray();
 
-let scales = new Scales(ScalesStorageEngineArray);
-
-//let newScales<StorageEngine> = uniFactory<StorageEngine>(StorageEngine);
-
-
-// let apple = new Apple("яблоки", 1000);
-
-// let tomato = new Tomato("помидоры", 1500);
-
-// let cucumber = new Cucumber("огурцы", 2500);
+let scales = new Scales(newStorageEA);
 
 
-// scales.add("apple");
-// scales.add("tomato");
+let fruit1 = new Products("Apple 1", 2);
+let fruit2 = new Products("Apple 2", 3);
 
-// console.log(scales.getNameList());
-// console.log(scales.getSumWeight());
-
-// scales.add(cucumber);
+let car1 = new Products("Volvo XC90", 2400);
+let car2 = new Products("Mazda 6", 1800);
 
 
-// console.log(scales.getNameList());
-// console.log(scales.getSumWeight());
+let fruitBasket = scales.storageEngine.addItem(fruit1);
+fruitBasket = scales.storageEngine.addItem(fruit2);
 
-// scales.remove(apple);
+let garage = scales.storageEngine.addItem(car1);
+garage = scales.storageEngine.addItem(car2);
 
 
-// console.log(scales.getNameList());
-// console.log(scales.getSumWeight());
+console.log(scales.storageEngine.getSumWeight());
+console.log(scales.storageEngine.getNameList());
+
+console.log(scales.storageEngine.getCount());
+console.log(scales.storageEngine.getItem(3));
+
