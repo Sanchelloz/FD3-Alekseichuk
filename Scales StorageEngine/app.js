@@ -1,13 +1,3 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var Products = /** @class */ (function () {
     function Products(currentName, currentWeight) {
         this.name = currentName;
@@ -25,23 +15,30 @@ var Products = /** @class */ (function () {
     return Products;
 }());
 ;
-var Scales = /** @class */ (function () {
-    function Scales() {
-        this.listAddedProducts = [];
+var ScalesStorageEngineArray = /** @class */ (function () {
+    function ScalesStorageEngineArray() {
+        this.items = [];
     }
     ;
-    Scales.prototype.add = function (currentProduct) {
-        this.listAddedProducts.push(currentProduct);
+    ;
+    ScalesStorageEngineArray.prototype.addItem = function (item) {
+        this.items.push(item);
+        console.log("сохранён объект с именем"
+            + item.getName() + " весом"
+            + item.getWeight() + " грамм");
     };
     ;
-    Scales.prototype.remove = function (currentProduct) {
-        var i = this.listAddedProducts.indexOf(currentProduct);
-        this.listAddedProducts.splice(i, 1);
+    ScalesStorageEngineArray.prototype.getItem = function (index) {
+        return this.items[index];
     };
     ;
-    Scales.prototype.getSumWeight = function () {
+    ScalesStorageEngineArray.prototype.getCount = function () {
+        return this.items.length;
+    };
+    ;
+    ScalesStorageEngineArray.prototype.getSumWeight = function () {
         var sumWeight = 0;
-        for (var _i = 0, _a = this.listAddedProducts; _i < _a.length; _i++) {
+        for (var _i = 0, _a = this.items; _i < _a.length; _i++) {
             var currentProduct = _a[_i];
             sumWeight += currentProduct.getWeight();
         }
@@ -49,9 +46,9 @@ var Scales = /** @class */ (function () {
         return sumWeight;
     };
     ;
-    Scales.prototype.getNameList = function () {
+    ScalesStorageEngineArray.prototype.getNameList = function () {
         var namesList = [];
-        for (var _i = 0, _a = this.listAddedProducts; _i < _a.length; _i++) {
+        for (var _i = 0, _a = this.items; _i < _a.length; _i++) {
             var currentProduct = _a[_i];
             namesList.push(currentProduct.getName());
         }
@@ -59,45 +56,51 @@ var Scales = /** @class */ (function () {
         return namesList;
     };
     ;
+    return ScalesStorageEngineArray;
+}());
+;
+// параметризованная фабрика
+// умеет создавать и возвращать объекты любых типов
+/*function uniFactory<objtype>(classRef: { new (): objtype; }): objtype {
+
+   return new classRef();
+
+};*/
+//	описывайте класс "весы", который шаблонизован StorageEngine и создавайте весы, указывая как тИповый аргумент ScalesStorageEngineArray 
+//	объект типа StorageEngine можно как создавать внутри класса Scale, так и передавать снаружи заранее созданный; 
+//	советую второй вариант
+//	ну и весы, когда хотят суммарный вес продуктов, обращаются именно к объекту типа StorageEngine
+//let newStorageEngine:Products = uniFactory<Products>;
+/*	так, окей, в классе Scales нужно описать переменную типа StorageEngine и присвоить ей в
+        конструкторе объект этого класса для создания объекта да, надо использовать эту фабрику*/
+var Scales = /** @class */ (function () {
+    function Scales(_storageEngine) {
+        this.storageEngine = _storageEngine;
+    }
+    ;
+    Scales.prototype.getSumWeight = function () {
+        return this.storageEngine.getSumWeight();
+    };
+    ;
+    Scales.prototype.getNameList = function () {
+        return this.storageEngine.getNameList();
+    };
+    ;
     return Scales;
 }());
 ;
-var Apple = /** @class */ (function (_super) {
-    __extends(Apple, _super);
-    function Apple(name, weight) {
-        return _super.call(this, name, weight) || this;
-    }
-    return Apple;
-}(Products));
-;
-var Tomato = /** @class */ (function (_super) {
-    __extends(Tomato, _super);
-    function Tomato(name, weight) {
-        return _super.call(this, name, weight) || this;
-    }
-    return Tomato;
-}(Products));
-;
-var Cucumber = /** @class */ (function (_super) {
-    __extends(Cucumber, _super);
-    function Cucumber(name, weight) {
-        return _super.call(this, name, weight) || this;
-    }
-    return Cucumber;
-}(Products));
-;
-var scales = new Scales();
-var apple = new Apple("яблоки", 1000);
-var tomato = new Tomato("помидоры", 1500);
-var cucumber = new Cucumber("огурцы", 2500);
-scales.add(apple);
-scales.add(tomato);
-console.log(scales.getNameList());
-console.log(scales.getSumWeight());
-scales.add(cucumber);
-console.log(scales.getNameList());
-console.log(scales.getSumWeight());
-scales.remove(apple);
-console.log(scales.getNameList());
-console.log(scales.getSumWeight());
+var newStorageEA = new ScalesStorageEngineArray();
+var scales = new Scales(newStorageEA);
+var fruit1 = new Products("Apple 1", 2);
+var fruit2 = new Products("Apple 2", 3);
+var car1 = new Products("Volvo XC90", 2400);
+var car2 = new Products("Mazda 6", 1800);
+var fruitBasket = scales.storageEngine.addItem(fruit1);
+fruitBasket = scales.storageEngine.addItem(fruit2);
+var garage = scales.storageEngine.addItem(car1);
+garage = scales.storageEngine.addItem(car2);
+console.log(scales.storageEngine.getSumWeight());
+console.log(scales.storageEngine.getNameList());
+console.log(scales.storageEngine.getCount());
+console.log(scales.storageEngine.getItem(3));
 //# sourceMappingURL=app.js.map
