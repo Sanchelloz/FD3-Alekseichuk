@@ -1,11 +1,12 @@
-<div class='Sprite'>
-  <div class='Photo'>
-    <img [src]="getPhoto()">
-  </div>
+<!-- <div class='Sprite' [background-image]=" 'http://fe.it-academy.by/Examples/cards2.png' " 
+[background-position]="'2px' + '2px'">
 
+</div> -->
+
+<div class='Sprite' [style.background]="'url('+photoURL+')'"
+    [style.width.px]="140" [style.height.px]="189" [style.background-position]="'0 0'">
+    	
 </div>
-
-
 <!--
 
 <hotel-title [hotel-name]="getName()"></hotel-title>

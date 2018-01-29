@@ -1,8 +1,6 @@
 div.Sprite {
-  width: 138px;
-	height: 189px;
+	margin: 20px auto 0;
+  cursor: pointer;
 }
 
-div.Photo {
-  margin-bottom: 20px;
-}
+

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -8,31 +9,34 @@ import { Component } from '@angular/core';
 })
 export class SpriteComponent {
 
-  private photoURL:string='http://fe.it-academy.by/Examples/cards2.png';
+  photoURL:string='http://fe.it-academy.by/Examples/cards2.png';
 
-  private coordinate:Array<{offset_x:number, offset_y:number, width:number, height:number}>=[
+  private offset_x:number
+  private offset_y:number
+ 
+
+
+  private size:Array<{width:number, height:number}>=[
     {
-      offset_x:22,
-      offset_y:2,
       width:189,
-      height:138
+      height:140
     },
   ];
 
-
-  get stars():number {
-    return this._stars;
+  get coord():number {
+    return (this.offset_x=22, this.offset_y=2)
   };
 
-  set stars(s:number) {
-    this._stars=s;
-  }
+/*  set coord({x:number, y:number}) {
+    this.offset_x=this.x;
+    this.offset_y=y;
+  }*/
 
   getName():string {
-    return this.hotelName;
+    return this.photoURL;
   }
 
-  getRooms():string {
+/*  getRooms():string {
     return this.rooms
       .map( room => "N"+room.num+"("+room.beds+"b)" )
       .join("\n")
@@ -41,7 +45,7 @@ export class SpriteComponent {
 
   getPhoto():string {
     return this.photo;
-  };
+  };*/
 
 
 }
