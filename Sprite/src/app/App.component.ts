@@ -12,20 +12,24 @@ export class AppBlockComponent {
   private imgWidth:number=138;
   private imgHeight:number=189;
 
-  @Input("coord")
+  @Input("coordX")
   private offset_x:number;
+
+  @Input("coordY")
   private offset_y:number;
 
-  @Output("coordChange")
+  @Output("coordXChange")
   private coordXOutputEE=new EventEmitter<number>();
+
+  @Output("coordYChange")
   private coordYOutputEE=new EventEmitter<number>();
 
-  getCoordinateX():string {
-    return this.offset_x+"px";
+  getCoordinateX():number {
+    return this.offset_x;
   }
 
-  getCoordinateY():string {
-    return this.offset_y+"px";
+  getCoordinateY():number {
+    return this.offset_y;
   }
 
   setCoordinateX(s:number):void {
@@ -34,6 +38,11 @@ export class AppBlockComponent {
 
   setCoordinateY(s:number):void {
     this.coordYOutputEE.emit(s);
+  }
+
+  setCoordinateXY(s1:number,s2:number):void {
+    this.setCoordinateX(s1);
+    this.setCoordinateY(s2);
   }
 
   getFoto():string {
