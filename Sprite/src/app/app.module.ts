@@ -3,11 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { SpriteComponent } from './sprite.component';
-//import { SpriteBtnComponent } from './sprite-btn.component';
+import { AppBlockComponent } from './app.component';
 
 @NgModule({
   imports: [ BrowserModule, FormsModule ],
   declarations: [ SpriteComponent,
+  AppBlockComponent
   ],
   providers: [],
   bootstrap: [SpriteComponent]

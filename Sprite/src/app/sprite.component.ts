@@ -1,5 +1,5 @@
 
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -9,43 +9,16 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class SpriteComponent {
 
-  photoURL:string='http://fe.it-academy.by/Examples/cards2.png';
-
-  private offset_x:number
-  private offset_y:number
- 
+  private _offset_x:number = 0;
+  private _offset_y:number = -2;
 
 
-  private size:Array<{width:number, height:number}>=[
-    {
-      width:189,
-      height:140
-    },
-  ];
-
-  get coord():number {
-    return (this.offset_x=22, this.offset_y=2)
-  };
-
-/*  set coord({x:number, y:number}) {
-    this.offset_x=this.x;
-    this.offset_y=y;
-  }*/
-
-  getName():string {
-    return this.photoURL;
+  get coordX():number {
+    return this._offset_x;
   }
 
-/*  getRooms():string {
-    return this.rooms
-      .map( room => "N"+room.num+"("+room.beds+"b)" )
-      .join("\n")
-      ;
-  };
-
-  getPhoto():string {
-    return this.photo;
-  };*/
-
+  get coordY():number {
+    return this._offset_y;
+  }
 
 }
