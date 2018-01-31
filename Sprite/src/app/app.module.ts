@@ -3,14 +3,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { SpriteComponent } from './sprite.component';
-import { AppBlockComponent } from './app.component';
+import { AppComponent } from './app.component';
 
 @NgModule({
   imports: [ BrowserModule, FormsModule ],
-  declarations: [ SpriteComponent,
-  AppBlockComponent
+  declarations: [ AppComponent,
+  	SpriteComponent,
   ],
   providers: [],
-  bootstrap: [SpriteComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

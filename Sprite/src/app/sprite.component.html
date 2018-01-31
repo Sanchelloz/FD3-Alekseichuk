@@ -1,4 +1,8 @@
 
-<app-block [(coordX)]="coordX" [(coordY)]="coordY">
-	
-</app-block>
+<div class='Sprite' [style.background]="'url(' + getFoto() + ')'"
+    [style.width.px]="getSizeWidth()" [style.height.px]="getSizeHeight()" 
+    [style.background-position]="getCoordinateX()+'px'+' '+getCoordinateY()+'px'" 
+    (click)="this.setCoordinateXY(284,-13370)"
+    >
+
+</div>

@@ -1,59 +1,30 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   moduleId: module.id,
-  selector: 'app-block',
+  selector: 'app',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css']
 })
-export class AppBlockComponent {
+export class AppComponent {
 
-  private photoURL:string = 'http://fe.it-academy.by/Examples/cards2.png';
-  private imgWidth:number=138;
-  private imgHeight:number=189;
+  private _offset_x:number = -2;
+  private _offset_y:number = 0;
 
-  @Input("coordX")
-  private offset_x:number;
-
-  @Input("coordY")
-  private offset_y:number;
-
-  @Output("coordXChange")
-  private coordXOutputEE=new EventEmitter<number>();
-
-  @Output("coordYChange")
-  private coordYOutputEE=new EventEmitter<number>();
-
-  getCoordinateX():number {
-    return this.offset_x;
+  get coordX():number {
+    return this._offset_x;
   }
 
-  getCoordinateY():number {
-    return this.offset_y;
+  get coordY():number {
+    return this._offset_y;
   }
 
-  setCoordinateX(s:number):void {
-    this.coordXOutputEE.emit(s);
+  set coordX(x:number) {
+    this._offset_x = x;
   }
 
-  setCoordinateY(s:number):void {
-    this.coordYOutputEE.emit(s);
+  set coordY(y:number) {
+    this._offset_y = y;
   }
 
-  setCoordinateXY(s1:number,s2:number):void {
-    this.setCoordinateX(s1);
-    this.setCoordinateY(s2);
-  }
-
-  getFoto():string {
-    return this.photoURL
-  };
-
-  getSizeWidth():number {
-    return this.imgWidth;
-  };
-
-  getSizeHeight():number {
-    return this.imgHeight;
-  };
 }
