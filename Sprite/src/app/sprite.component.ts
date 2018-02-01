@@ -14,39 +14,6 @@ export class SpriteComponent {
   private imgWidth:number=138;
   private imgHeight:number=189;
 
-  @Input("coordX")
-  private offset_x:number;
-
-  @Input("coordY")
-  private offset_y:number;
-
-  @Output("coordXChange")
-  private coordXOutputEE=new EventEmitter<number>();
-
-  @Output("coordYChange")
-  private coordYOutputEE=new EventEmitter<number>();
-
-  getCoordinateX():number {
-    return this.offset_x;
-  }
-
-  getCoordinateY():number {
-    return this.offset_y;
-  }
-
-  setCoordinateX(s:number):void {
-    this.coordXOutputEE.emit(s);
-  }
-
-  setCoordinateY(s:number):void {
-    this.coordYOutputEE.emit(s);
-  }
-
-  setCoordinateXY(s1:number,s2:number):void {
-    this.setCoordinateX(s1);
-    this.setCoordinateY(s2);
-  }
-
   getFoto():string {
     return this.photoURL
   };
@@ -58,4 +25,26 @@ export class SpriteComponent {
   getSizeHeight():number {
     return this.imgHeight;
   };
+
+  @Input("coordX")
+  private offset_x:number; //создаем входное свойство чтоб потом привязать к нему get CoordX() из Арр.component.ts
+
+  @Input("coordY")
+  private offset_y:number;
+
+  @Output("clicked")
+  private clicked = new EventEmitter<void>(); //создаем выходное свойство чтоб увидеть что что-то было сделано, в часстности кликнут элемент
+
+  getCoordinateX():number {
+    return this.offset_x;
+  }
+
+  getCoordinateY():number {
+    return this.offset_y;
+  }
+
+  imgClicked():void {
+    this.clicked.emit(); //выпускаем событие, что оно произошло
+  }
+
 }

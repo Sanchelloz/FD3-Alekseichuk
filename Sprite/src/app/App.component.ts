@@ -11,20 +11,25 @@ export class AppComponent {
   private _offset_x:number = -2;
   private _offset_y:number = 0;
 
-  get coordX():number {
+  get CoordX():number {
     return this._offset_x;
   }
 
-  get coordY():number {
+  get CoordY():number {
     return this._offset_y;
   }
 
-  set coordX(x:number) {
+  setCoordX(x:number) {
     this._offset_x = x;
   }
 
-  set coordY(y:number) {
+  setCoordY(y:number) {
     this._offset_y = y;
+  }
+
+  changeImg(s1:number,s2:number):void {
+    this.setCoordX(s1);
+    this.setCoordY(s2);
   }
 
 }
